@@ -40,5 +40,11 @@ Route::middleware('auth:sanctum')->get('/admin/recent-data', [AdminController::c
 Route::get('/departments', [DepartmentController::class, 'index']);
 Route::post('/departments', [DepartmentController::class, 'store']);
 Route::delete('/departments/{id}', [DepartmentController::class, 'destroy']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::put('/me/password', [AuthController::class, 'changePassword']);
+});
+Route::middleware('auth:sanctum')->get('/user/profile', function (Request $request) {
+    return $request->user();
+});
 
 

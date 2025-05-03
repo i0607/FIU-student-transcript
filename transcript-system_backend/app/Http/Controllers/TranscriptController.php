@@ -123,10 +123,57 @@ class TranscriptController extends Controller
         };
     }
 
+
     public function exportPdf($studentNumber)
     {
-        // Keep your existing PDF logic
+        $student = Student::where('student_number', $studentNumber)->firstOrFail();
+        $records = $student->transcripts()->with('course')->get();
+    
+        $grouped = [];
+        $totalCredits = 0;
+        $totalGradePoints = 0;
+        $gradePoints = [
+            "A" => 4.0, "B+" => 3.5, "B" => 3.0, "C+" => 2.5,
+            "C" => 2.0, "D+" => 1.5, "D" => 1.0, "FF" => 0.0
+        ];
+        $passing = ["A", "B+", "B", "C+", "C"];
+    
+        foreach ($records as $record) {
+            $semester = $record->semester;
+            $grade = $record->grade;
+            $credits = $record->course->credits ?? 0;
+            $points = $gradePoints[$grade] ?? 0;
+    
+            $grouped[$semester]['courses'][] = [
+                'code' => $record->course->code,
+                'title' => $record->course->title,
+                'grade' => $grade,
+                'credits' => $credits,
+                'status' => in_array($grade, $passing) ? 'Passed' : 'Failed',
+            ];
+    
+            $grouped[$semester]['grade_points'] = ($grouped[$semester]['grade_points'] ?? 0) + ($points * $credits);
+            $grouped[$semester]['total_credits'] = ($grouped[$semester]['total_credits'] ?? 0) + $credits;
+        }
+    
+        foreach ($grouped as $sem => &$data) {
+            $data['gpa'] = round($data['grade_points'] / $data['total_credits'], 2);
+            $totalCredits += $data['total_credits'];
+            $totalGradePoints += $data['grade_points'];
+        }
+    
+        $cumulativeGPA = $totalCredits ? round($totalGradePoints / $totalCredits, 2) : 0;
+    
+        $pdf = Pdf::loadView('transcripts.pdf', [
+            'student' => $student,
+            'transcripts' => $grouped,
+            'cumulativeGPA' => $cumulativeGPA
+        ]);
+    
+        return $pdf->download("transcript_{$studentNumber}.pdf");
     }
+    
+    
 
     public function exportExcel($studentNumber)
     {

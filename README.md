@@ -66,7 +66,8 @@ php artisan migrate --seed
 php artisan serve
 ```
 
-> Make sure you have MySQL running and `.env` properly configured.
+> Make sure PostgreSQL is running and your .env is configured correctly
+
 
 ### Frontend Setup
 

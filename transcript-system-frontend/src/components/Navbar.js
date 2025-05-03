@@ -104,20 +104,22 @@ const handleLogout = () => {
 
   // Effect to close sidebar when clicking outside
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (sidebarRef.current && 
-          !sidebarRef.current.contains(event.target) && 
-          !event.target.closest('[aria-label="toggle sidebar"]') && 
-          sidebarOpen) {
+    const handleClickOutside = (event) => {
+      const sidebar = sidebarRef.current;
+      const isClickInsideSidebar = sidebar && sidebar.contains(event.target);
+      const isToggleButton = event.target.closest('[aria-label="toggle sidebar"]');
+  
+      if (!isClickInsideSidebar && !isToggleButton && sidebarOpen) {
         setSidebarOpen(false);
       }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside);
+    };
+  
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [sidebarOpen]);
+  
 
   // Navigation links based on user role
   const navigationLinks = [
@@ -206,7 +208,7 @@ const handleLogout = () => {
                 </ListItemIcon>
                 My Profile
               </MenuItem>
-              <MenuItem component={Link} to="/profile/settings">
+              <MenuItem component={Link} to="/change-password">
                 <ListItemIcon>
                   <Settings fontSize="small" />
                 </ListItemIcon>
@@ -302,8 +304,8 @@ const handleLogout = () => {
           <ListItem disablePadding>
             <ListItemButton 
               component={Link} 
-              to="/profile/settings"
-              selected={location.pathname === '/profile/settings'}
+              to="/change-password"
+              selected={location.pathname === '/change-password'}
               sx={{
                 '&.Mui-selected': {
                   backgroundColor: '#ffeeee',

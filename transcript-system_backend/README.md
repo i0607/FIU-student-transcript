@@ -82,8 +82,8 @@ npm start
 
 | Role   | Email            | Password  |
 |--------|------------------|-----------|
-| Admin  | admin@fiu.edu    | admin123  |
-| Staff  | staff@fiu.edu    | staff123  |
+| Admin  | admin@fiu.edu    | admin7894  |
+| Staff  | staff@fiu.edu    | staff7894  |
 
 ---
 

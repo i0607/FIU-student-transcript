@@ -9,6 +9,8 @@ import Navbar from "./components/Navbar";
 import AdminPage from './pages/AdminPage';
 import AdminDashboard from "./pages/AdminDashboard";
 import DepartmentPage from './pages/DepartmentPage';
+import ProfilePage from "./pages/ProfilePage";
+import ChangePasswordPage from "./pages/ChangePasswordPage";
 
 function AppContent() {
   const location = useLocation();
@@ -57,6 +59,9 @@ function AppContent() {
           </AdminRoute>
         }
 />
+
+<Route path="/profile" element={<ProfilePage />} />
+<Route path="/change-password" element={<ChangePasswordPage />} />
       </Routes>
     </>
   );
