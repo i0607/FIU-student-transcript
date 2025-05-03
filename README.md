@@ -33,7 +33,7 @@ A full-stack web application for managing and viewing student transcripts, inclu
 ### Backend
 - Laravel 8.0
 - Sanctum for API auth
-- MySQL
+- PostgreSQL
 - DomPDF (PDF export)
 - Laravel Excel (XLSX export)
 

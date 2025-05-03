@@ -66,7 +66,7 @@ function Navbar() {
 
 const handleLogout = () => {
   localStorage.removeItem("token");
-  navigate("/login"); // Redirect to login page
+  navigate("/"); // Redirect to login page
 };
   // State for user menu
   const [anchorEl, setAnchorEl] = useState(null);
@@ -213,9 +213,9 @@ const handleLogout = () => {
                 Settings
               </MenuItem>
               <Divider />
-              <MenuItem >
+              <MenuItem onClick={handleLogout}>
                 <ListItemIcon>
-                  <Logout fontSize="small" onClick={handleLogout}/>
+                  <Logout fontSize="small" />
                 </ListItemIcon>
                 Logout
               </MenuItem>
@@ -320,7 +320,7 @@ const handleLogout = () => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/logout">
+            <ListItemButton onClick={handleLogout}>
               <ListItemIcon>
                 <Logout fontSize="small" />
               </ListItemIcon>
