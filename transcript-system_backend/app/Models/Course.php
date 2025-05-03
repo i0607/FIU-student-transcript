@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
-    public function transcripts()
-    {
-        return $this->hasMany(Transcript::class);
-    }
-    }
+    use HasFactory;
+    protected $fillable = ['code', 'title', 'category', 'credits', 'department_id', 'semester', 'ects','year'];
+
+}

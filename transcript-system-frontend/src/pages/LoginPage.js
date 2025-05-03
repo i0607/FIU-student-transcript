@@ -1,7 +1,16 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import {
+  Container,
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Paper,
+  Divider,
+} from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Box, TextField, Button, Typography, Alert } from '@mui/material';
+import logo from "../logo195.png"; // Ensure this path is correct
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -14,73 +23,109 @@ function LoginPage() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      const res = await axios.post("http://127.0.0.1:8000/api/login", {
-        email: form.email,
-        password: form.password,
-      }, {
-        headers: {
-          Accept: "application/json",
-        },
-      });
-      console.log("✅ Login success:", res.data);
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("role", res.data.user.role);
+    setError("");
 
-      navigate("/transcript");
+    try {
+      const res = await axios.post("http://127.0.0.1:8000/api/login", form, {
+        headers: { Accept: "application/json" },
+      });
+
+           // Store token and user role in localStorage
+           localStorage.setItem("token", res.data.token);
+           localStorage.setItem("userRole", res.data.user.role);
+           if (res.data.user.role === "admin") {
+            navigate("/admin/dashboard");
+          } else if (res.data.user.role === "staff") {
+            navigate("/transcript");
+          } else {
+            // For any other role, or as a fallback
+            navigate("/transcript");
+          }
     } catch (err) {
       setError("Login failed: Invalid credentials");
     }
   };
 
   return (
-    <Box 
-      maxWidth={400} 
-      mx="auto" 
-      mt={10} 
-      p={4} 
-      boxShadow={3} 
-      borderRadius={2} 
-      bgcolor="background.paper"
+    <Box
+      sx={{
+        minHeight: "100vh",
+
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        px: 2,
+      }}
     >
-      <Typography variant="h5" fontWeight="bold" mb={3} align="center">
-        FIU Transcript Login
+      <Paper
+        elevation={8}
+        sx={{
+          padding: 5,
+          maxWidth: 440,
+          width: "100%",
+          borderRadius: 4,
+          backgroundColor: "rgba(255,255,255,0.95)",
+        }}
+      >
+        <Box sx={{ textAlign: "center", mb: 3 }}>
+          <img src={logo} alt="FIU Logo" style={{ width: 120, marginBottom: 10 }} />
+          <Typography variant="h5" fontWeight="bold">
+            FIU Transcript System
+          </Typography>
+          <Divider sx={{ my: 2 }} />
+        </Box>
+
+        {error && (
+          <Typography color="error" textAlign="center" mb={2}>
+            {error}
+          </Typography>
+        )}
+
+        <form onSubmit={handleLogin}>
+          <TextField
+            label="Email"
+            name="email"
+            fullWidth
+            margin="normal"
+            variant="outlined"
+            value={form.email}
+            onChange={handleChange}
+            required
+          />
+          <TextField
+            label="Password"
+            name="password"
+            type="password"
+            fullWidth
+            margin="normal"
+            variant="outlined"
+            value={form.password}
+            onChange={handleChange}
+            required
+          />
+          <Button
+            type="submit"
+            fullWidth
+            color="error"
+            variant="contained"
+            size="large"
+            sx={{ mt: 3, py: 1.5, fontWeight: 'bold' }}
+          >
+            Login
+          </Button>
+        </form>
+      </Paper>
+
+      <Typography
+        variant="body2"
+        color="black"
+        sx={{ mt: 4, textAlign: "center" }}
+      >
+        © Copyright_FIU
       </Typography>
-
-      {error && (
-        <Alert severity="error" sx={{ mb: 2 }}>
-          {error}
-        </Alert>
-      )}
-
-      <form onSubmit={handleLogin}>
-        <TextField
-          fullWidth
-          label="Email"
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-          margin="normal"
-        />
-        <TextField
-          fullWidth
-          label="Password"
-          type="password"
-          name="password"
-          value={form.password}
-          onChange={handleChange}
-          margin="normal"
-        />
-        <Button 
-          type="submit" 
-          fullWidth 
-          variant="contained" 
-          color="primary" 
-          sx={{ mt: 2 }}
-        >
-          Login
-        </Button>
-      </form>
     </Box>
   );
 }

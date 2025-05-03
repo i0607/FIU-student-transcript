@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const token = localStorage.getItem("token");
-  const role = localStorage.getItem("role"); // "admin" or "staff"
+  const role = localStorage.getItem("userRole"); // "admin" or "staff"
 
   if (!token) {
     // Not logged in, redirect to login
