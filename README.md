@@ -87,6 +87,3 @@ npm start
 
 ---
 
-## 📄 License
-
-MIT License. See `LICENSE.md` for details.
