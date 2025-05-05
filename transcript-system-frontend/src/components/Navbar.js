@@ -332,10 +332,9 @@ const handleLogout = () => {
         </List>
       </Drawer>
 
-      {/* Main content - This is where your page content will go */}
       <Main open={sidebarOpen}>
         <DrawerHeader />
-        {/* Your page content will be rendered here */}
+    
       </Main>
     </Box>
   );
