@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User; 
+use Illuminate\Support\Facades\Hash;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,7 +24,12 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([
-            UserSeeder::class,
+            // Replace UserSeeder with your existing seeders
+            UserSeeder::class,           // 1. Users first
+            DepartmentSeeder::class,     // 2. Departments 
+            CoursesSeeder::class,        // 3. Courses BEFORE transcripts
+            StudentSeeder::class,        // 4. Students
+            TranscriptSeeder::class,     // 5. Transcripts LAST
         ]);
     }
 }

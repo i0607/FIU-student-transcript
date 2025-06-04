@@ -17,14 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string('student_number')->unique();
             $table->string('name');
-            $table->string('department_id');
+            $table->foreignId('department_id')->constrained()->onDelete('cascade');
             $table->date('date_of_birth')->nullable();
             $table->date('entry_date')->nullable();
             $table->date('graduation_date')->nullable();
             $table->timestamps();
         });
     }
-    
+
     /**
      * Reverse the migrations.
      *

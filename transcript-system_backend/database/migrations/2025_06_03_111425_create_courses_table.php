@@ -17,12 +17,18 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->string('title');
-            $table->integer('credits');
+            $table->integer('credits')->default(3);
             $table->string('category')->nullable(); // AC, AE, etc.
+            $table->foreignId('department_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('faculty_id')->nullable()->constrained()->onDelete('set null');
+            $table->integer('semester')->nullable();
+            $table->string('year')->nullable();
+            $table->integer('ects')->nullable();
+            $table->unsignedBigInteger('semester_id')->nullable(); // reference to semesters table if needed
             $table->timestamps();
         });
     }
-    
+
 
     /**
      * Reverse the migrations.
@@ -31,8 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('courses', function (Blueprint $table) {
-            $table->dropColumn('category');
-        });    
+        Schema::dropIfExists('courses');
     }
 };

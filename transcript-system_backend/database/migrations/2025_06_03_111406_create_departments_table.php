@@ -13,16 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-    Schema::create('transcripts', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('student_id')->constrained()->onDelete('cascade');
-        $table->foreignId('course_id')->constrained()->onDelete('cascade');
-        $table->string('grade');
-        $table->string('semester');
-        $table->timestamps();
-    });
+        Schema::create('departments', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+            $table->foreignId('faculty_id')->nullable()->constrained()->onDelete('set null');
+            $table->timestamps();
+        });
     }
-
 
     /**
      * Reverse the migrations.
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transcripts');
+        Schema::dropIfExists('departments');
     }
 };
