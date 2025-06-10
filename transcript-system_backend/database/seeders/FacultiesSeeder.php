@@ -19,6 +19,10 @@ class FacultiesSeeder extends Seeder
         [
                 'id' => 1,
                 'title' => 'Faculty of Engineering'
+        ],
+        [
+                'id' => 2,
+                'title' => 'Faculty of Economics and Administrative Sciences'
             ]
         ];
                 DB::table('faculties')->insert($faculties);

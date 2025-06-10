@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('ects')->nullable();
             $table->string('department_title');
             $table->string('course_category');
-
+            $table->string('version')->nullable();
             $table->timestamps();
         });
     }
