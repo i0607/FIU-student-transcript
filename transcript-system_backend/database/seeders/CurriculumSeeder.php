@@ -1,0 +1,900 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class CurriculumSeeder extends Seeder
+{
+    public function run()
+    {
+        $curriculums = [
+            // Semester 1 Courses
+            [
+                'faculty_id' => DB::table('faculties')->first()->id ?? 1,
+                'department_id' => DB::table('departments')->first()->id ?? 1,
+                'course_id' => DB::table('courses')->where('code', 'MATH123')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'MATH123')->value('category'),
+                'title' => 'DISCRETE MATHEMATICS',
+                'lecture_hours' => 3,
+                'lab_hours' => 1,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'PHYS121')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'PHYS121')->value('category'),
+                'title' => 'PHYSICS-I',
+                'lecture_hours' => 2,
+                'lab_hours' => 3,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'MATH121')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'MATH121')->value('category'),
+                'title' => 'CALCULUS-I',
+                'lecture_hours' => 3,
+                'lab_hours' => 2,
+                'total_credits' => 4,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ENGR101')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ENGR101')->value('category'),
+                'title' => 'INFORMATION TECHNOLOGY AND APPLICATIONS',
+                'lecture_hours' => 2,
+                'lab_hours' => 1,
+                'total_credits' => 2,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ENGR103')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ENGR103')->value('category'),
+                'title' => 'COMPUTER PROGRAMMING-I',
+                'lecture_hours' => 2,
+                'lab_hours' => 2,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ENGL121')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ENGL121')->value('category'),
+                'title' => 'ENGLISH-I',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'TUOG101')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'TUOG101')->value('category'),
+                'title' => 'TURKISH LANGUAGE-I',
+                'lecture_hours' => 2,
+                'lab_hours' => 0,
+                'total_credits' => 2,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+
+            // Semester 2 Courses
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'MATH122')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'MATH122')->value('category'),
+                'title' => 'CALCULUS-II',
+                'lecture_hours' => 3,
+                'lab_hours' => 2,
+                'total_credits' => 4,
+                'pre_requisite' => 'MATH121',
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'MATH124')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'MATH124')->value('category'),
+                'title' => 'LINEAR ALGEBRA',
+                'lecture_hours' => 3,
+                'lab_hours' => 1,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'PHYS122')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'PHYS122')->value('category'),
+                'title' => 'PHYSICS-II',
+                'lecture_hours' => 2,
+                'lab_hours' => 3,
+                'total_credits' => 4,
+                'pre_requisite' => 'PHYS121',
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ENGR104')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ENGR104')->value('category'),
+                'title' => 'COMPUTER PROGRAMMING-II',
+                'lecture_hours' => 2,
+                'lab_hours' => 2,
+                'total_credits' => 3,
+                'pre_requisite' => 'ENGR103',
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ENGL122')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ENGL122')->value('category'),
+                'title' => 'ENGLISH-II',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => 'ENGL121',
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'TARH101')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'TARH101')->value('category'),
+                'title' => 'ATATURK\'S PRINCIPLES AND HISTORY OF TURKISH REFORMS-I',
+                'lecture_hours' => 2,
+                'lab_hours' => 0,
+                'total_credits' => 2,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'TUOG102')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'TUOG102')->value('category'),
+                'title' => 'TURKISH LANGUAGE-II',
+                'lecture_hours' => 2,
+                'lab_hours' => 0,
+                'total_credits' => 2,
+                'pre_requisite' => 'TUOG101',
+                'department_title' => 'Software Engineering'
+            ],
+
+            // Semester 3 Courses
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ELEE211')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ELEE211')->value('category'),
+                'title' => 'DIGITAL LOGIC DESIGN',
+                'lecture_hours' => 3,
+                'lab_hours' => 2,
+                'total_credits' => 4,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ELEE231')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ELEE231')->value('category'),
+                'title' => 'CIRCUIT THEORY-I',
+                'lecture_hours' => 3,
+                'lab_hours' => 2,
+                'total_credits' => 4,
+                'pre_requisite' => 'MATH124, PHYS122',
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'CMPE215')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'CMPE215')->value('category'),
+                'title' => 'ALGORITHMS AND DATA STRUCTURES',
+                'lecture_hours' => 3,
+                'lab_hours' => 1,
+                'total_credits' => 3,
+                'pre_requisite' => 'ENGR104',
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'MATH225')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'MATH225')->value('category'),
+                'title' => 'DIFFERENTIAL EQUATIONS',
+                'lecture_hours' => 4,
+                'lab_hours' => 0,
+                'total_credits' => 4,
+                'pre_requisite' => 'MATH121, MATH124',
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'TARH102')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'TARH102')->value('category'),
+                'title' => 'ATATURK\'S PRINCIPLES AND HISTORY OF TURKISH REFORMS-II',
+                'lecture_hours' => 2,
+                'lab_hours' => 0,
+                'total_credits' => 2,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+
+            // Semester 4 Courses
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'CMPE216')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'CMPE216')->value('category'),
+                'title' => 'OBJECT ORIENTED PROGRAMMING',
+                'lecture_hours' => 2,
+                'lab_hours' => 2,
+                'total_credits' => 3,
+                'pre_requisite' => 'ENGR104',
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'CMPE232')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'CMPE232')->value('category'),
+                'title' => 'OPERATING SYSTEMS',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => 'ENGR104',
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'CMPE252')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'CMPE252')->value('category'),
+                'title' => 'ANALYSIS OF ALGORITHMS',
+                'lecture_hours' => 3,
+                'lab_hours' => 2,
+                'total_credits' => 4,
+                'pre_requisite' => 'CMPE215',
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ENGR215')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ENGR215')->value('category'),
+                'title' => 'RESEARCH METHODS FOR ENGINEERING AND ARCHITECTURE',
+                'lecture_hours' => 2,
+                'lab_hours' => 0,
+                'total_credits' => 2,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'STAT226')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'STAT226')->value('category'),
+                'title' => 'PROBABILITY AND STATISTICS',
+                'lecture_hours' => 3,
+                'lab_hours' => 1,
+                'total_credits' => 3,
+                'pre_requisite' => 'MATH121',
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'OHSA206')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'OHSA206')->value('category'),
+                'title' => 'OCCUPATIONAL HEALTH AND SAFETY',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+
+            // Semester 5 Courses
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'CMPE321')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'CMPE321')->value('category'),
+                'title' => 'MICROPOCESSORS',
+                'lecture_hours' => 3,
+                'lab_hours' => 2,
+                'total_credits' => 4,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'CMPE341')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'CMPE341')->value('category'),
+                'title' => 'DATABASE SYSTEMS',
+                'lecture_hours' => 3,
+                'lab_hours' => 2,
+                'total_credits' => 4,
+                'pre_requisite' => 'CMPE215',
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE343')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE343')->value('category'),
+                'title' => 'SOFTWARE ANALYSIS AND DESIGN',
+                'lecture_hours' => 2,
+                'lab_hours' => 2,
+                'total_credits' => 3,
+                'pre_requisite' => 'CMPE216',
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE315')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE315')->value('category'),
+                'title' => 'VISUAL PROGRAMMING',
+                'lecture_hours' => 2,
+                'lab_hours' => 2,
+                'total_credits' => 3,
+                'pre_requisite' => 'CMPE216',
+                'department_title' => 'Software Engineering'
+            ],
+
+            // Semester 6 Courses
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE344')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE344')->value('category'),
+                'title' => 'SOFTWARE PROJECT MANAGEMENT',
+                'lecture_hours' => 2,
+                'lab_hours' => 1,
+                'total_credits' => 2,
+                'pre_requisite' => 'SFWE343',
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'MATH328')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'MATH328')->value('category'),
+                'title' => 'NUMERICAL ANALYSIS',
+                'lecture_hours' => 3,
+                'lab_hours' => 1,
+                'total_credits' => 3,
+                'pre_requisite' => 'MATH124, MATH225',
+                'department_title' => 'Software Engineering'
+            ],
+
+            // Semester 7 Courses
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE403')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE403')->value('category'),
+                'title' => 'SUMMER TRAINING',
+                'lecture_hours' => 0,
+                'lab_hours' => 0,
+                'total_credits' => 0,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ENGR401')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ENGR401')->value('category'),
+                'title' => 'ENGINEERING DESIGN-I',
+                'lecture_hours' => 1,
+                'lab_hours' => 2,
+                'total_credits' => 2,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE415')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE415')->value('category'),
+                'title' => 'SOFTWARE ARCHITECTURE',
+                'lecture_hours' => 3,
+                'lab_hours' => 1,
+                'total_credits' => 3,
+                'pre_requisite' => 'SFWE343',
+                'department_title' => 'Software Engineering'
+            ],
+
+            // Semester 8 Courses
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE411')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE411')->value('category'),
+                'title' => 'SOFTWARE VALIDATION AND TESTING',
+                'lecture_hours' => 3,
+                'lab_hours' => 1,
+                'total_credits' => 3,
+                'pre_requisite' => 'SFWE343',
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ENGR402')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ENGR402')->value('category'),
+                'title' => 'ENGINEERING DESIGN-II',
+                'lecture_hours' => 1,
+                'lab_hours' => 2,
+                'total_credits' => 2,
+                'pre_requisite' => 'ENGR401',
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ENGR404')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ENGR404')->value('category'),
+                'title' => 'ENGINEERING ATTRIBUTES AND ETHICS',
+                'lecture_hours' => 2,
+                'lab_hours' => 0,
+                'total_credits' => 2,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+
+            // Area Elective Courses
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE316')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE316')->value('category'),
+                'title' => 'INTERNET AND WEB PROGRAMMING',
+                'lecture_hours' => 2,
+                'lab_hours' => 2,
+                'total_credits' => 3,
+                'pre_requisite' => 'CMPE216',
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE434')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE434')->value('category'),
+                'title' => 'CRYPTOGRAPHY',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE412')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE412')->value('category'),
+                'title' => 'SOFTWARE QUALITY ASSURANCE',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE422')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE422')->value('category'),
+                'title' => 'MOBILE APPLICATION DEVELOPMENT',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE431')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE431')->value('category'),
+                'title' => 'HUMAN-COMPUTER INTERACTION',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE441')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE441')->value('category'),
+                'title' => 'ADVANCE DATABASE',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE442')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE442')->value('category'),
+                'title' => 'OBJECT-ORIENTED PROGRAMMING LANGUAGE AND SYSTEMS',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE444')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE444')->value('category'),
+                'title' => 'SOFTWARE CONSTRUCTION',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE445')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE445')->value('category'),
+                'title' => 'RAPID APPLICATION DEVELOPMENT',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE451')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE451')->value('category'),
+                'title' => 'INFORMATION RETRIEVAL',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE467')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE467')->value('category'),
+                'title' => 'DATA MINING',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE468')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE468')->value('category'),
+                'title' => 'PROCESS MINING',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE472')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE472')->value('category'),
+                'title' => 'COMPUTER GRAPHICS',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWE474')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWE474')->value('category'),
+                'title' => 'INTRODUCTION TO PARALLEL COMPUTING',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+
+            // Faculty Elective Courses
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'CMPE431')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'CMPE431')->value('category'),
+                'title' => 'ADVANCED COMPUTER NETWORKS',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'CMPE432')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'CMPE432')->value('category'),
+                'title' => 'WIRELESS COMMUNICATION NETWORKS',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'CMPE433')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'CMPE433')->value('category'),
+                'title' => 'WIRELESS SENSOR NETWORKS',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'CMPE461')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'CMPE461')->value('category'),
+                'title' => 'COMPUTING SYSTEMS',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'CMPE462')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'CMPE462')->value('category'),
+                'title' => 'SERVICE-ORIENTED COMPUTING',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'CMPE463')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'CMPE463')->value('category'),
+                'title' => 'CLOUD COMPUTING',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'CMPE464')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'CMPE464')->value('category'),
+                'title' => 'ARTIFICIAL INTELLIGENCE',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'CMPE465')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'CMPE465')->value('category'),
+                'title' => 'NEURAL NETWORKS',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'CMPE466')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'CMPE466')->value('category'),
+                'title' => 'EXPERT SYSTEMS',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 4,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'CHEM121')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'CHEM121')->value('category'),
+                'title' => 'CHEMISTRY',
+                'lecture_hours' => 2,
+                'lab_hours' => 3,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'MATH228')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'MATH228')->value('category'),
+                'title' => 'ENGINEERING MATHEMATICS',
+                'lecture_hours' => 3,
+                'lab_hours' => 1,
+                'total_credits' => 3,
+                'pre_requisite' => 'MATH122, MATH124',
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ELEE341')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ELEE341')->value('category'),
+                'title' => 'ELECTRONICS-I',
+                'lecture_hours' => 3,
+                'lab_hours' => 2,
+                'total_credits' => 4,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ELEE331')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ELEE331')->value('category'),
+                'title' => 'SIGNALS AND SYSTEMS',
+                'lecture_hours' => 3,
+                'lab_hours' => 2,
+                'total_credits' => 4,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ELEE362')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ELEE362')->value('category'),
+                'title' => 'COMMUNICATION SYSTEMS',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ELEE431')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ELEE431')->value('category'),
+                'title' => 'DIGITAL SIGNAL PROCESSING',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => 'ELEE331',
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'CMPE322')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'CMPE322')->value('category'),
+                'title' => 'DATA COMMUNICATION AND COMPUTER NETWORKS',
+                'lecture_hours' => 3,
+                'lab_hours' => 2,
+                'total_credits' => 4,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'MECE215')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'MECE215')->value('category'),
+                'title' => 'BASIC MECHANICS: STATICS',
+                'lecture_hours' => 3,
+                'lab_hours' => 1,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+
+            // Alternative courses (HIST111, TURK131, TURK132) - if needed
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'HIST111')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'HIST111')->value('category'),
+                'title' => 'ATATURK\'S PRINCIPLES AND HISTORY OF TURKISH REFORMS-I',
+                'lecture_hours' => 2,
+                'lab_hours' => 0,
+                'total_credits' => 2,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'TURK131')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'TURK131')->value('category'),
+                'title' => 'TURKISH AS A FOREIGN LANGUAGE-I',
+                'lecture_hours' => 2,
+                'lab_hours' => 0,
+                'total_credits' => 2,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'TURK132')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'TURK132')->value('category'),
+                'title' => 'TURKISH AS A FOREIGN LANGUAGE-II',
+                'lecture_hours' => 2,
+                'lab_hours' => 0,
+                'total_credits' => 2,
+                'pre_requisite' => 'TURK131',
+                'department_title' => 'Software Engineering'
+            ],
+        ];
+
+        // Filter out any null course_id entries (in case some courses don't exist)
+        $curriculums = array_filter($curriculums, function($curriculum) {
+            return $curriculum['course_id'] !== null;
+        });
+
+        // Insert data in batches of 20 records
+        $chunks = array_chunk($curriculums, 20);
+        foreach ($chunks as $chunk) {
+            DB::table('curriculums')->insert($chunk);
+        }
+    }
+}

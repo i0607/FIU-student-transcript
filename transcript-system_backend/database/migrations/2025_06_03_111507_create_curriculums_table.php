@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('pre_requisite')->nullable();
             $table->integer('ects')->nullable();
             $table->string('department_title');
+            $table->string('course_category');
+
             $table->timestamps();
         });
     }

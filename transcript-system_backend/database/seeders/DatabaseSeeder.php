@@ -25,11 +25,13 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             // Replace UserSeeder with your existing seeders
-            UserSeeder::class,           // 1. Users first
-            DepartmentSeeder::class,     // 2. Departments 
-            CoursesSeeder::class,        // 3. Courses BEFORE transcripts
-            StudentSeeder::class,        // 4. Students
-            TranscriptSeeder::class,     // 5. Transcripts LAST
+            //UserSeeder::class,           // 1. Users first
+            //DepartmentSeeder::class,     // 2. Departments 
+            //CoursesSeeder::class,        // 3. Courses BEFORE transcripts
+             //   StudentSeeder::class,        // 4. Students
+             //   FacultiesSeeder::class,
+            //CurriculumSeeder::class,
+                TranscriptSeeder::class,     // 5. Transcripts LAST
         ]);
     }
 }
