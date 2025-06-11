@@ -1838,7 +1838,8 @@ class CurriculumSeeder extends Seeder
                 'ects' => 3
             ],
             [
-        'faculity_id' => 1,
+                'faculity_id' => 1,
+                'department_id' => 1,
                 'course_id' => DB::table('courses')->where('code', 'PHYS121')->value('id'),
                 'course_category' => DB::table('courses')->where('code', 'PHYS121')->value('category'),
                 'title' => 'PHYSICS-I',
@@ -2063,6 +2064,64 @@ class CurriculumSeeder extends Seeder
                 'department_title' => 'Software Engineering',
                 'version' => 'New',
                 'ects' => 6
+            ],
+            [
+                'faculty_id' => 3,
+                'department_id' => 4,
+                'course_id' => DB::table('courses')->where('code', 'ARCH281')->value('id'),
+                'course_category' => 'UE',
+                'title' => 'BASICS OF PHOTOGRAPHY',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'ects' => 4,
+                'department_title' => 'General Education',
+                'version' => 'Old'
+            ],
+            [
+                'faculty_id' => 3,
+                'department_id' => 4,
+                'course_id' => DB::table('courses')->where('code', 'FRNC101')->value('id'),
+                'course_category' => 'UE',
+                'title' => 'FRENCH-I',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'ects' => 4,
+                'department_title' => 'General Education',
+                'version' => 'Old'
+            ],
+
+            // AREA ELECTIVE COURSES (AE) - Available for Engineering departments
+            [
+                'faculty_id' => 1,
+                'department_id' => 2,
+                'course_id' => DB::table('courses')->where('code', 'COMP463')->value('id'),
+                'course_category' => 'AE',
+                'title' => 'CLOUD COMPUTING',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'ects' => 7,
+                'department_title' => 'Computer Engineering',
+                'version' => 'Old'
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 2,
+                'course_id' => DB::table('courses')->where('code', 'COMP465')->value('id'),
+                'course_category' => 'AE',
+                'title' => 'NEURAL NETWORKS',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'ects' => 7,
+                'department_title' => 'Computer Engineering',
+                'version' => 'Old'
             ],
             [
                 'faculty_id' => 1,

@@ -21,6 +21,10 @@ class FacultiesSeeder extends Seeder
                 'title' => 'Faculty of Engineering'
         ],
         [
+                'id' => 3,
+                'title' => 'others'
+        ],
+        [
                 'id' => 2,
                 'title' => 'Faculty of Economics and Administrative Sciences'
             ]

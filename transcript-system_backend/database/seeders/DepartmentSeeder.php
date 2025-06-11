@@ -31,6 +31,13 @@ class DepartmentSeeder extends Seeder
                 'faculty_id' =>'2',
                 'created_at' => '2025-04-28 16:30:39',
                 'updated_at' => '2025-05-01 17:10:23'
+            ],
+            [
+                'id' => 4,
+                'name' => 'others',
+                'faculty_id' =>'3',
+                'created_at' => '2025-04-28 16:30:39',
+                'updated_at' => '2025-05-01 17:10:23'
             ]
         
         ];

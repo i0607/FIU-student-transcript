@@ -196,7 +196,11 @@ class CoursesSeeder extends Seeder
             ['code' => 'SOFT472', 'title' => 'COMPUTER GRAPHICS', 'credits' => 3, 'category' => 'AE', 'semester' => 0, 'ects' => 7],
             ['code' => 'SOFT473', 'title' => 'DIGITAL IMAGE PROCESSING', 'credits' => 3, 'category' => 'AE', 'semester' => 0, 'ects' => 7],
             ['code' => 'SOFT474', 'title' => 'INTRODUCTION TO PARALLEL COMPUTING', 'credits' => 3, 'category' => 'AE', 'semester' => 0, 'ects' => 7],
-     
+            ['code' => 'ARCH281', 'title' => 'INTRODUCTION TO ARCHITECTURE', 'credits' => 3, 'category' => 'UE', 'semester' => null, 'ects' => 4],
+            ['code' => 'FRNC101', 'title' => 'FRENCH-I', 'credits' => 3, 'category' => 'UE', 'semester' => null, 'ects' => 4],
+            ['code' => 'COMP463', 'title' => 'CLOUD COMPUTING', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+            ['code' => 'COMP465', 'title' => 'NEURAL NETWORKS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+            
         ];
 
         // Insert data in batches of 20 records
