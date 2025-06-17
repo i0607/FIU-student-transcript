@@ -196,10 +196,71 @@ class CoursesSeeder extends Seeder
             ['code' => 'SOFT472', 'title' => 'COMPUTER GRAPHICS', 'credits' => 3, 'category' => 'AE', 'semester' => 0, 'ects' => 7],
             ['code' => 'SOFT473', 'title' => 'DIGITAL IMAGE PROCESSING', 'credits' => 3, 'category' => 'AE', 'semester' => 0, 'ects' => 7],
             ['code' => 'SOFT474', 'title' => 'INTRODUCTION TO PARALLEL COMPUTING', 'credits' => 3, 'category' => 'AE', 'semester' => 0, 'ects' => 7],
-            ['code' => 'ARCH281', 'title' => 'INTRODUCTION TO ARCHITECTURE', 'credits' => 3, 'category' => 'UE', 'semester' => null, 'ects' => 4],
+            ['code' => 'ARCH281', 'title' => 'BASICS OF PHOTOGRAPHY', 'credits' => 3, 'category' => 'UE', 'semester' => null, 'ects' => 4],
             ['code' => 'FRNC101', 'title' => 'FRENCH-I', 'credits' => 3, 'category' => 'UE', 'semester' => null, 'ects' => 4],
             ['code' => 'COMP463', 'title' => 'CLOUD COMPUTING', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
             ['code' => 'COMP465', 'title' => 'NEURAL NETWORKS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+            ['code' => 'AINE201', 'title' => 'FUNDAMENTALS OF ARTIFICIAL INTELLIGENCE', 'credits' => 3, 'category' => 'AC', 'semester' => 3, 'ects' => 6],
+            ['code' => 'AINE204', 'title' => 'ARTIFICIAL INTELLIGENCE TOOLS', 'credits' => 4, 'category' => 'AC', 'semester' => 4, 'ects' => 6],
+            ['code' => 'AINE332', 'title' => 'DEEP NEURAL NETWORKS', 'credits' => 3, 'category' => 'AC', 'semester' => 6, 'ects' => 6],
+            ['code' => 'AINE403', 'title' => 'SUMMER TRAINING', 'credits' => 0, 'category' => 'FC', 'semester' => 7, 'ects' => 2],
+            ['code' => 'AINE413', 'title' => 'MACHINE LEARNING', 'credits' => 3, 'category' => 'AC', 'semester' => 7, 'ects' => 6],
+
+            // AI AREA ELECTIVES
+            ['code' => 'AINEXX1', 'title' => 'AREA ELECTIVE', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'AINEXX2', 'title' => 'AREA ELECTIVE', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'AINEXX3', 'title' => 'AREA ELECTIVE', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'AINEXX4', 'title' => 'AREA ELECTIVE', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+
+            // SPECIFIC AI AREA ELECTIVES
+            ['code' => 'AINE471', 'title' => 'INTRODUCTION TO DATA ANALYSIS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'AINE481', 'title' => 'ETHICS OF ARTIFICIAL INTELLIGENCE', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+
+            // FACULTY ELECTIVES (NEW)
+            ['code' => 'ENGRXX1', 'title' => 'FACULTY ELECTIVE', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 5],
+            ['code' => 'ENGRXX2', 'title' => 'FACULTY ELECTIVE', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 5],
+            ['code' => 'ENGRXX3', 'title' => 'FACULTY ELECTIVE', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 5],
+            ['code' => 'ENGRXX4', 'title' => 'FACULTY ELECTIVE', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 5],
+
+            // UNIVERSITY ELECTIVES (NEW)
+            ['code' => 'UNIEXX1', 'title' => 'UNIVERSITY ELECTIVE', 'credits' => 3, 'category' => 'UE', 'semester' => null, 'ects' => 4],
+            ['code' => 'UNIEXX2', 'title' => 'UNIVERSITY ELECTIVE', 'credits' => 3, 'category' => 'UE', 'semester' => null, 'ects' => 4],
+            ['code' => 'UNIEXX3', 'title' => 'UNIVERSITY ELECTIVE', 'credits' => 3, 'category' => 'UE', 'semester' => null, 'ects' => 4],
+            ['code' => 'UNIEXX4', 'title' => 'UNIVERSITY ELECTIVE', 'credits' => 3, 'category' => 'UE', 'semester' => null, 'ects' => 4],
+
+            // ELECTRICAL/ELECTRONIC ELECTIVES FROM CURRICULUM
+            ['code' => 'ELEE434', 'title' => 'DIGITAL CONTROL SYSTEMS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'ELEE442', 'title' => 'POWER ELECTRONICS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'ELEE451', 'title' => 'MICROWAVE THEORY', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'ELEE461', 'title' => 'COMMUNICATIONS SYSTEMS II', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'ELEE464', 'title' => 'WIRELESS SENSOR NETWORKS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'ELEE462', 'title' => 'WIRELESS COMMUNICATIONS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'ELEE463', 'title' => 'INFORMATION THEORY', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'ELEE471', 'title' => 'HIGH VOLTAGE TECHNIQUES', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'ELEE474', 'title' => 'DIGITAL IMAGE PROCESSING', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'ELEE435', 'title' => 'INTRODUCTION TO ROBOTICS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+
+            // OTHER ENGINEERING COURSES
+            ['code' => 'CVLE102', 'title' => 'ENGINEERING DRAWING', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 5],
+
+            // SOFTWARE ENGINEERING AREA ELECTIVES (FROM CURRICULUM)
+            ['code' => 'SFWE431', 'title' => 'HUMAN COMPUTER INTERACTION', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE412', 'title' => 'SOFTWARE QUALITY ASSURANCE', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE466', 'title' => 'EXPERT SYSTEMS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+
+            // MISSING PREP COURSES (if not already in your system)
+            ['code' => 'PREP101', 'title' => 'ENGLISH PREP SCHOOL (A1-A1+)', 'credits' => 0, 'category' => 'UC', 'semester' => null, 'ects' => 0],
+            ['code' => 'PREP102', 'title' => 'ENGLISH PREP SCHOOL (A1+-A2)', 'credits' => 0, 'category' => 'UC', 'semester' => null, 'ects' => 0],
+            ['code' => 'PREP106', 'title' => 'ENGLISH PROFICIENCY TEST', 'credits' => 0, 'category' => 'UC', 'semester' => null, 'ects' => 0],
+
+            // BUSINESS/ECONOMICS COURSES
+            ['code' => 'ACCT201', 'title' => 'PRINCIPLES OF ACCOUNTING-I', 'credits' => 3, 'category' => 'UE', 'semester' => null, 'ects' => 6],
+            ['code' => 'BUSN102', 'title' => 'PRINCIPLES OF MANAGEMENT-II', 'credits' => 3, 'category' => 'UE', 'semester' => null, 'ects' => 5],
+            ['code' => 'ECON101', 'title' => 'INTRODUCTION TO ECONOMICS I', 'credits' => 3, 'category' => 'UE', 'semester' => null, 'ects' => 7],
+
+            // STATISTICS COURSE (using different code from AI curriculum)
+            ['code' => 'ISTA226', 'title' => 'PROBABILITY AND STATISTICS', 'credits' => 3, 'category' => 'FC', 'semester' => 4, 'ects' => 6],
+            ['code' => 'ENGP070', 'title' => 'ENGLISH PROFICIENCY TEST', 'credits' => 0, 'category' => null, 'semester' => 0, 'ects' => 0],
             
         ];
 

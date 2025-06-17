@@ -38,6 +38,13 @@ class DepartmentSeeder extends Seeder
                 'faculty_id' =>'3',
                 'created_at' => '2025-04-28 16:30:39',
                 'updated_at' => '2025-05-01 17:10:23'
+            ],
+            [
+                'id' => 5,
+                'name' => 'ARTIFICIAL INTELLIGENCE ENGINEERING',
+                'faculty_id' =>'1',
+                'created_at' => '2025-04-28 16:30:39',
+                'updated_at' => '2025-05-01 17:10:23'
             ]
         
         ];

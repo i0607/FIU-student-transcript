@@ -20,6 +20,9 @@ return new class extends Migration
             
             $table->string('grade');
             $table->string('semester');
+            $table->integer('credits')->nullable();
+            $table->integer('points')->nullable();
+            $table->integer('earned_points')->nullable();
             $table->timestamps();
         });
     }

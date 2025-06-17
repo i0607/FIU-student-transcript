@@ -26,7 +26,6 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();   
  });
-Route::middleware('auth:sanctum')->get('/transcripts/{studentNumber}', [TranscriptController::class, 'getTranscript']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/staff', [StaffController::class, 'index']);
