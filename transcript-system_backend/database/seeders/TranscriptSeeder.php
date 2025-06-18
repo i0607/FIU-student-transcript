@@ -297,75 +297,7 @@ class TranscriptSeeder extends Seeder
             ['student_id' => $student4Id, 'course_code' => 'ENGR404', 'grade' => '0', 'semester' => '2024-2025 Spring', 'credits' => 3.00, 'points' => 2.00, 'earned_points' => 0.00],
             ['student_id' => $student4Id, 'course_code' => 'PREP101', 'grade' => 'S', 'semester' => '2020-2021 Fall', 'credits' => 0.00, 'points' => 0.00, 'earned_points' => 0.00],
     
-            // 2020-2021 Spring - English Prep
-            ['student_id' => $student4Id, 'course_code' => 'PREP102', 'grade' => 'S', 'semester' => '2020-2021 Spring', 'credits' => 0.00, 'points' => 0.00, 'earned_points' => 0.00],
-            ['student_id' => $student4Id, 'course_code' => 'PREP106', 'grade' => 'S', 'semester' => '2020-2021 Spring', 'credits' => 0.00, 'points' => 0.00, 'earned_points' => 0.00],
             
-            // 2021-2022 Fall
-            ['student_id' => $student4Id, 'course_code' => 'ENGL121', 'grade' => 'C', 'semester' => '2021-2022 Fall', 'credits' => 4.00, 'points' => 3.00, 'earned_points' => 6.00],
-            ['student_id' => $student4Id, 'course_code' => 'ENGR101', 'grade' => 'C+', 'semester' => '2021-2022 Fall', 'credits' => 2.00, 'points' => 2.00, 'earned_points' => 4.60],
-            ['student_id' => $student4Id, 'course_code' => 'ENGR103', 'grade' => 'C-', 'semester' => '2021-2022 Fall', 'credits' => 5.00, 'points' => 3.00, 'earned_points' => 5.10],
-            ['student_id' => $student4Id, 'course_code' => 'MATH121', 'grade' => 'B+', 'semester' => '2021-2022 Fall', 'credits' => 6.00, 'points' => 4.00, 'earned_points' => 13.20],
-            ['student_id' => $student4Id, 'course_code' => 'MATH123', 'grade' => 'C', 'semester' => '2021-2022 Fall', 'credits' => 5.00, 'points' => 3.00, 'earned_points' => 6.00],
-            ['student_id' => $student4Id, 'course_code' => 'PHYS121', 'grade' => 'C', 'semester' => '2021-2022 Fall', 'credits' => 5.00, 'points' => 4.00, 'earned_points' => 8.00],
-            ['student_id' => $student4Id, 'course_code' => 'TURK131', 'grade' => 'C-', 'semester' => '2021-2022 Fall', 'credits' => 3.00, 'points' => 2.00, 'earned_points' => 3.40],
-            
-            // 2021-2022 Spring
-            ['student_id' => $student4Id, 'course_code' => 'ENGL122', 'grade' => 'D+', 'semester' => '2021-2022 Spring', 'credits' => 4.00, 'points' => 3.00, 'earned_points' => 3.90],
-            ['student_id' => $student4Id, 'course_code' => 'ENGR104', 'grade' => 'B+', 'semester' => '2021-2022 Spring', 'credits' => 4.00, 'points' => 3.00, 'earned_points' => 9.90],
-            ['student_id' => $student4Id, 'course_code' => 'HIST111', 'grade' => 'B', 'semester' => '2021-2022 Spring', 'credits' => 3.00, 'points' => 2.00, 'earned_points' => 6.00],
-            ['student_id' => $student4Id, 'course_code' => 'MATH122', 'grade' => 'B', 'semester' => '2021-2022 Spring', 'credits' => 6.00, 'points' => 4.00, 'earned_points' => 12.00],
-            ['student_id' => $student4Id, 'course_code' => 'MATH124', 'grade' => 'A-', 'semester' => '2021-2022 Spring', 'credits' => 5.00, 'points' => 3.00, 'earned_points' => 11.10],
-            ['student_id' => $student4Id, 'course_code' => 'PHYS122', 'grade' => 'C+', 'semester' => '2021-2022 Spring', 'credits' => 5.00, 'points' => 4.00, 'earned_points' => 9.20],
-            ['student_id' => $student4Id, 'course_code' => 'TURK132', 'grade' => 'D', 'semester' => '2021-2022 Spring', 'credits' => 3.00, 'points' => 2.00, 'earned_points' => 2.00],
-            
-            // 2022-2023 Fall
-            ['student_id' => $student4Id, 'course_code' => 'BUSN101', 'grade' => 'B', 'semester' => '2022-2023 Fall', 'credits' => 5.00, 'points' => 3.00, 'earned_points' => 9.00],
-            ['student_id' => $student4Id, 'course_code' => 'CMPE215', 'grade' => 'B+', 'semester' => '2022-2023 Fall', 'credits' => 6.00, 'points' => 3.00, 'earned_points' => 9.90],
-            ['student_id' => $student4Id, 'course_code' => 'ELEE211', 'grade' => 'B', 'semester' => '2022-2023 Fall', 'credits' => 6.00, 'points' => 4.00, 'earned_points' => 12.00],
-            ['student_id' => $student4Id, 'course_code' => 'ELEE231', 'grade' => 'D', 'semester' => '2022-2023 Fall', 'credits' => 6.00, 'points' => 4.00, 'earned_points' => 4.00],
-            ['student_id' => $student4Id, 'course_code' => 'HIST112', 'grade' => 'B+', 'semester' => '2022-2023 Fall', 'credits' => 3.00, 'points' => 2.00, 'earned_points' => 6.60],
-            ['student_id' => $student4Id, 'course_code' => 'MATH225', 'grade' => 'B-', 'semester' => '2022-2023 Fall', 'credits' => 5.00, 'points' => 4.00, 'earned_points' => 10.80],
-            
-            // 2022-2023 Spring
-            ['student_id' => $student4Id, 'course_code' => 'CMPE216', 'grade' => 'B+', 'semester' => '2022-2023 Spring', 'credits' => 6.00, 'points' => 3.00, 'earned_points' => 9.90],
-            ['student_id' => $student4Id, 'course_code' => 'CMPE232', 'grade' => 'C+', 'semester' => '2022-2023 Spring', 'credits' => 6.00, 'points' => 3.00, 'earned_points' => 6.90],
-            ['student_id' => $student4Id, 'course_code' => 'CMPE252', 'grade' => 'B+', 'semester' => '2022-2023 Spring', 'credits' => 6.00, 'points' => 4.00, 'earned_points' => 13.20],
-            ['student_id' => $student4Id, 'course_code' => 'ENGR215', 'grade' => 'C-', 'semester' => '2022-2023 Spring', 'credits' => 3.00, 'points' => 2.00, 'earned_points' => 3.40],
-            ['student_id' => $student4Id, 'course_code' => 'OHSA206', 'grade' => 'B-', 'semester' => '2022-2023 Spring', 'credits' => 3.00, 'points' => 3.00, 'earned_points' => 8.10],
-            ['student_id' => $student4Id, 'course_code' => 'STAT226', 'grade' => 'B+', 'semester' => '2022-2023 Spring', 'credits' => 6.00, 'points' => 3.00, 'earned_points' => 9.90],
-            
-            // 2023-2024 Fall
-            ['student_id' => $student4Id, 'course_code' => 'ACCT201', 'grade' => 'C+', 'semester' => '2023-2024 Fall', 'credits' => 6.00, 'points' => 3.00, 'earned_points' => 6.90],
-            ['student_id' => $student4Id, 'course_code' => 'CMPE321', 'grade' => 'C+', 'semester' => '2023-2024 Fall', 'credits' => 6.00, 'points' => 4.00, 'earned_points' => 9.20],
-            ['student_id' => $student4Id, 'course_code' => 'CMPE341', 'grade' => 'A-', 'semester' => '2023-2024 Fall', 'credits' => 5.00, 'points' => 4.00, 'earned_points' => 14.80],
-            ['student_id' => $student4Id, 'course_code' => 'ELEE331', 'grade' => 'D', 'semester' => '2023-2024 Fall', 'credits' => 5.00, 'points' => 4.00, 'earned_points' => 4.00],
-            ['student_id' => $student4Id, 'course_code' => 'ELEE341', 'grade' => 'C', 'semester' => '2023-2024 Fall', 'credits' => 5.00, 'points' => 4.00, 'earned_points' => 8.00],
-            ['student_id' => $student4Id, 'course_code' => 'SFWE343', 'grade' => 'B', 'semester' => '2023-2024 Fall', 'credits' => 5.00, 'points' => 3.00, 'earned_points' => 9.00],
-            
-            // 2023-2024 Spring
-            ['student_id' => $student4Id, 'course_code' => 'CMPE322', 'grade' => 'C', 'semester' => '2023-2024 Spring', 'credits' => 5.00, 'points' => 4.00, 'earned_points' => 8.00],
-            ['student_id' => $student4Id, 'course_code' => 'CMPE324', 'grade' => 'B', 'semester' => '2023-2024 Spring', 'credits' => 5.00, 'points' => 3.00, 'earned_points' => 9.00],
-            ['student_id' => $student4Id, 'course_code' => 'ECON101', 'grade' => 'C', 'semester' => '2023-2024 Spring', 'credits' => 7.00, 'points' => 3.00, 'earned_points' => 6.00],
-            ['student_id' => $student4Id, 'course_code' => 'MATH228', 'grade' => 'B-', 'semester' => '2023-2024 Spring', 'credits' => 6.00, 'points' => 3.00, 'earned_points' => 8.10],
-            ['student_id' => $student4Id, 'course_code' => 'MATH328', 'grade' => 'D', 'semester' => '2023-2024 Spring', 'credits' => 6.00, 'points' => 3.00, 'earned_points' => 3.00],
-            ['student_id' => $student4Id, 'course_code' => 'SFWE316', 'grade' => 'B+', 'semester' => '2023-2024 Spring', 'credits' => 6.00, 'points' => 3.00, 'earned_points' => 9.90],
-            
-            // 2024-2025 Fall
-            ['student_id' => $student4Id, 'course_code' => 'BUSN102', 'grade' => 'B', 'semester' => '2024-2025 Fall', 'credits' => 5.00, 'points' => 3.00, 'earned_points' => 9.00],
-            ['student_id' => $student4Id, 'course_code' => 'CMPE403', 'grade' => 'S', 'semester' => '2024-2025 Fall', 'credits' => 2.00, 'points' => 0.00, 'earned_points' => 0.00],
-            ['student_id' => $student4Id, 'course_code' => 'CMPE421', 'grade' => 'C', 'semester' => '2024-2025 Fall', 'credits' => 6.00, 'points' => 3.00, 'earned_points' => 6.00],
-            ['student_id' => $student4Id, 'course_code' => 'CMPE463', 'grade' => 'C+', 'semester' => '2024-2025 Fall', 'credits' => 6.00, 'points' => 3.00, 'earned_points' => 6.90],
-            ['student_id' => $student4Id, 'course_code' => 'CMPE464', 'grade' => 'D', 'semester' => '2024-2025 Fall', 'credits' => 6.00, 'points' => 3.00, 'earned_points' => 3.00],
-            ['student_id' => $student4Id, 'course_code' => 'ENGR401', 'grade' => 'A-', 'semester' => '2024-2025 Fall', 'credits' => 6.00, 'points' => 2.00, 'earned_points' => 7.40],
-            
-            // 2024-2025 Spring (Current - In Progress)
-            ['student_id' => $student4Id, 'course_code' => 'AINE312', 'grade' => '0', 'semester' => '2024-2025 Spring', 'credits' => 5.00, 'points' => 3.00, 'earned_points' => 0.00],
-            ['student_id' => $student4Id, 'course_code' => 'CMPE431', 'grade' => '0', 'semester' => '2024-2025 Spring', 'credits' => 6.00, 'points' => 3.00, 'earned_points' => 0.00],
-            ['student_id' => $student4Id, 'course_code' => 'CMPE455', 'grade' => '0', 'semester' => '2024-2025 Spring', 'credits' => 6.00, 'points' => 3.00, 'earned_points' => 0.00],
-            ['student_id' => $student4Id, 'course_code' => 'ENGR402', 'grade' => '0', 'semester' => '2024-2025 Spring', 'credits' => 10.00, 'points' => 3.00, 'earned_points' => 0.00],
-            ['student_id' => $student4Id, 'course_code' => 'ENGR404', 'grade' => '0', 'semester' => '2024-2025 Spring', 'credits' => 3.00, 'points' => 2.00, 'earned_points' => 0.00],
-
             // ===== KAKUMBA MULUMBA (Student ID: 5, Number: 1903010042) =====
             
             // 2019-2020 Fall - English Prep
