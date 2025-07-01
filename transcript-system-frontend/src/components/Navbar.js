@@ -55,8 +55,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-
-
 function Navbar() {
   const role = localStorage.getItem('userRole'); // Get role from localStorage
   const [userName, setUserName] = useState(localStorage.getItem('name') || 'User');
@@ -64,13 +62,16 @@ function Navbar() {
   const sidebarRef = useRef(null);
   const navigate = useNavigate();
 
-const handleLogout = () => {
-  localStorage.removeItem("token");
-  navigate("/"); // Redirect to login page
-};
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("name");
+    navigate("/"); // Redirect to login page
+  };
+
   // State for user menu
   const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  const userMenuOpen = Boolean(anchorEl);
   
   // State for sidebar
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -89,10 +90,19 @@ const handleLogout = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
+  // Handle sidebar navigation clicks
+  const handleSidebarNavigation = (path) => {
+    navigate(path);
+    // Optionally close sidebar on mobile
+    if (window.innerWidth < 768) {
+      setSidebarOpen(false);
+    }
+  };
+
   // Effect to update userName if it changes in localStorage
   useEffect(() => {
     const handleStorageChange = () => {
-      const storedName = localStorage.getItem('userName');
+      const storedName = localStorage.getItem('name') || localStorage.getItem('userName');
       if (storedName) {
         setUserName(storedName);
       }
@@ -119,7 +129,6 @@ const handleLogout = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [sidebarOpen]);
-  
 
   // Navigation links based on user role
   const navigationLinks = [
@@ -172,9 +181,9 @@ const handleLogout = () => {
             <IconButton
               onClick={handleUserMenuClick}
               size="small"
-              aria-controls={open ? 'account-menu' : undefined}
+              aria-controls={userMenuOpen ? 'account-menu' : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
+              aria-expanded={userMenuOpen ? 'true' : undefined}
               color="inherit"
               sx={{ display: 'flex', alignItems: 'center' }}
             >
@@ -190,7 +199,7 @@ const handleLogout = () => {
             <Menu
               anchorEl={anchorEl}
               id="account-menu"
-              open={open}
+              open={userMenuOpen}
               onClose={handleUserMenuClose}
               onClick={handleUserMenuClose}
               transformOrigin={{ horizontal: 'right', vertical: 'top' }}
@@ -228,6 +237,7 @@ const handleLogout = () => {
 
       {/* Sidebar */}
       <Drawer
+        ref={sidebarRef}
         sx={{
           width: drawerWidth,
           flexShrink: 0,
@@ -260,8 +270,7 @@ const handleLogout = () => {
           {navigationLinks.map((link) => (
             <ListItem key={link.text} disablePadding>
               <ListItemButton 
-                component={Link} 
-                to={link.path}
+                onClick={() => handleSidebarNavigation(link.path)}
                 selected={location.pathname === link.path}
                 sx={{
                   '&.Mui-selected': {
@@ -283,8 +292,7 @@ const handleLogout = () => {
         <List>
           <ListItem disablePadding>
             <ListItemButton 
-              component={Link} 
-              to="/profile"
+              onClick={() => handleSidebarNavigation('/profile')}
               selected={location.pathname === '/profile'}
               sx={{
                 '&.Mui-selected': {
@@ -303,8 +311,7 @@ const handleLogout = () => {
           </ListItem>
           <ListItem disablePadding>
             <ListItemButton 
-              component={Link} 
-              to="/change-password"
+              onClick={() => handleSidebarNavigation('/change-password')}
               selected={location.pathname === '/change-password'}
               sx={{
                 '&.Mui-selected': {
@@ -334,7 +341,6 @@ const handleLogout = () => {
 
       <Main open={sidebarOpen}>
         <DrawerHeader />
-    
       </Main>
     </Box>
   );

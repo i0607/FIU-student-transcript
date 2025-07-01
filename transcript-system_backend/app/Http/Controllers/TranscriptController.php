@@ -9,6 +9,7 @@ use App\Models\Course;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\TranscriptExport;
+use Illuminate\Support\Facades\DB;
 
 class TranscriptController extends Controller
 {
@@ -31,37 +32,32 @@ class TranscriptController extends Controller
 
         foreach ($grouped as $semester => $entries) {
             $semesterGradePoints = 0;
-            $semesterCredits = 0; // ALL credits (including NG, E, etc.)
-            $semesterCreditsEarned = 0; // Only passed courses
+            $semesterCredits = 0;
+            $semesterCreditsEarned = 0;
             $semesterECTS = 0;
             $courses = [];
 
             foreach ($entries as $entry) {
-                // Use credits column for both ECTS and Credits if ects_credits doesn't exist
                 $ectsCredits = $entry->course->ects_credits ?? $entry->course->credits ?? 0;
-                $credits = $entry->course->credits ?? 0; // Actual credits for GPA
+                $credits = $entry->course->credits ?? 0;
                 $gradePoint = $this->gradeToPoint($entry->grade);
                 
-                // Calculate individual course grade points
                 $courseGradePoints = 0;
                 $countsInGPA = true;
                 $isEarned = false;
                 
-                // ALWAYS add credits to semester totals, regardless of grade
-                $semesterCredits += $credits; // Include ALL courses in credit calculation
-                $semesterECTS += $ectsCredits; // Include ALL courses in ECTS calculation
+                $semesterCredits += $credits;
+                $semesterECTS += $ectsCredits;
                 
                 if ($gradePoint === null) {
-                    // Special grades like NG, E still count toward total credits and GPA calculation with 0 points
-                    $countsInGPA = true; // Changed: NG grades DO count in GPA calculation
-                    $courseGradePoints = 0; // Show 0.00 for NG grades
-                    $semesterGradePoints += 0; // Add 0 points to semester total
+                    $countsInGPA = true;
+                    $courseGradePoints = 0;
+                    $semesterGradePoints += 0;
                 } else {
                     $courseGradePoints = $credits * $gradePoint;
                     $semesterGradePoints += $courseGradePoints;
                     
-                    // Check if credits are "earned" (passing grade)
-                    if ($gradePoint > 0) { // Anything above F is considered earned
+                    if ($gradePoint > 0) {
                         $isEarned = true;
                         $semesterCreditsEarned += $credits;
                     }
@@ -73,7 +69,7 @@ class TranscriptController extends Controller
                     'grade' => $entry->grade,
                     'ects_credits' => $ectsCredits,
                     'credits' => $credits,
-                    'grade_points' => number_format($courseGradePoints, 2, '.', ''), // Use dot for frontend consistency
+                    'grade_points' => number_format($courseGradePoints, 2, '.', ''),
                     'category' => $entry->course->category ?? 'Others',
                     'color' => $this->getCategoryColor($entry->course->category ?? 'Others'),
                     'counts_in_gpa' => $countsInGPA,
@@ -81,128 +77,33 @@ class TranscriptController extends Controller
                 ];
             }
 
-            // Calculate semester GPA using ALL credits (including NG with 0 points) - use truncation (floor) like the sample
             $semesterGPA = $semesterCredits > 0 ? floor(($semesterGradePoints / $semesterCredits) * 100) / 100 : 0.00;
             
-            // Update grand totals
             $grandTotalGradePoints += $semesterGradePoints;
-            $grandTotalCredits += $semesterCredits; // ALL credits (including NG, E)
-            $grandTotalCreditsEarned += $semesterCreditsEarned; // Only earned credits
+            $grandTotalCredits += $semesterCredits;
+            $grandTotalCreditsEarned += $semesterCreditsEarned;
             $grandTotalECTS += $semesterECTS;
             
-            // Calculate cumulative GPA using ALL credits - use truncation (floor) like the sample
             $cumulativeGPA = $grandTotalCredits > 0 ? floor(($grandTotalGradePoints / $grandTotalCredits) * 100) / 100 : 0.00;
 
             $structuredTranscript[] = [
                 'semester' => $semester,
                 'courses' => $courses,
                 'semester_gpa' => number_format($semesterGPA, 2, '.', ''),
-                'semester_credits' => $semesterCredits, // Credits attempted (for GPA calculation)
-                'semester_credits_earned' => $semesterCreditsEarned, // Credits earned (passed)
+                'semester_credits' => $semesterCredits,
+                'semester_credits_earned' => $semesterCreditsEarned,
                 'semester_ects' => $semesterECTS,
                 'semester_grade_points' => number_format($semesterGradePoints, 2, '.', ''),
                 'cumulative_gpa' => number_format($cumulativeGPA, 2, '.', ''),
-                'grand_total_credits' => $grandTotalCredits, // Total attempted
-                'grand_total_credits_earned' => $grandTotalCreditsEarned, // Total earned
+                'grand_total_credits' => $grandTotalCredits,
+                'grand_total_credits_earned' => $grandTotalCreditsEarned,
                 'grand_total_ects' => $grandTotalECTS,
                 'grand_total_grade_points' => number_format($grandTotalGradePoints, 2, '.', ''),
             ];
         }
 
-        // ✅ FIXED: Determine remaining courses - MATCH BY COURSE CODE (more reliable)
-        
-        // Get course codes and their latest grades
-        $courseCodeGrades = [];
-        foreach ($transcripts as $transcript) {
-            $courseCode = $transcript->course->code ?? null;
-            $grade = strtoupper($transcript->grade);
-            
-            if ($courseCode) {
-                // Keep the latest grade for each course code (handles retakes)
-                $courseCodeGrades[$courseCode] = $grade;
-            }
-        }
-        
-        // Define passing grades
-        $passingGrades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-'];
-        $failingGrades = ['F', 'FF'];
-        
-        // Categorize course codes
-        $passedCourseCodes = [];
-        $failedCourseCodes = [];
-        
-        foreach ($courseCodeGrades as $courseCode => $grade) {
-            if (in_array($grade, $passingGrades)) {
-                $passedCourseCodes[] = $courseCode;
-            } elseif (in_array($grade, $failingGrades)) {
-                $failedCourseCodes[] = $courseCode;
-            }
-        }
-        
-        // Determine curriculum version
-        $studentNumberPrefix = substr($studentNumber, 0, 2);
-        $curriculumVersion = in_array($studentNumberPrefix, ['19', '20']) ? 'old' : 'new';
-        
-        \Log::info('=== REMAINING COURSES DEBUG ===');
-        \Log::info('Student: ' . $studentNumber . ' | Version: ' . $curriculumVersion);
-        \Log::info('Course codes attempted: ' . count($courseCodeGrades));
-        \Log::info('Passed course codes: ' . json_encode($passedCourseCodes));
-        \Log::info('Failed course codes: ' . json_encode($failedCourseCodes));
-        
-        // Get all curriculum courses
-        $curriculumQuery = Course::where('department_id', $student->department_id);
-        if (\Schema::hasColumn('courses', 'version')) {
-            $curriculumQuery->where('version', $curriculumVersion);
-        }
-        $allCurriculumCourses = $curriculumQuery->get();
-        
-        \Log::info('Total curriculum courses found: ' . $allCurriculumCourses->count());
-        
-        // Build remaining courses list - MATCH BY COURSE CODE
-        $remainingCourses = collect();
-        
-        foreach ($allCurriculumCourses as $course) {
-            $courseCode = $course->code;
-            
-            // Skip if already passed this course code
-            if (in_array($courseCode, $passedCourseCodes)) {
-                \Log::debug('Skipping passed course: ' . $courseCode);
-                continue;
-            }
-            
-            // Determine status
-            $status = 'Not Taken';
-            $isRetake = false;
-            
-            if (array_key_exists($courseCode, $courseCodeGrades)) {
-                $grade = $courseCodeGrades[$courseCode];
-                if (in_array($grade, $failingGrades)) {
-                    $status = 'Retake Required (Failed: ' . $grade . ')';
-                    $isRetake = true;
-                } else {
-                    // Has some other grade (NG, W, etc.)
-                    $status = 'Retake Required (' . $grade . ')';
-                    $isRetake = true;
-                }
-            }
-            
-            $remainingCourses->push([
-                'code' => $course->code,
-                'title' => $course->title,
-                'credits' => $course->credits,
-                'ects_credits' => $course->ects_credits ?? $course->credits,
-                'category' => $course->category,
-                'semester' => $course->semester,
-                'department_id' => $course->department_id,
-                'version' => $course->version ?? $curriculumVersion,
-                'status' => $status,
-                'is_retake' => $isRetake,
-            ]);
-        }
-        
-        \Log::info('Final remaining courses: ' . $remainingCourses->count());
-        \Log::info('Retakes: ' . $remainingCourses->where('is_retake', true)->count());
-        \Log::info('Not taken: ' . $remainingCourses->where('is_retake', false)->count());
+        // Get remaining courses from student's department only
+        $remainingCourses = $this->getRemainingCourses($student, $transcripts);
 
         return response()->json([
             'student' => [
@@ -222,10 +123,227 @@ class TranscriptController extends Controller
         ]);
     }
 
+    /**
+     * Get remaining courses from student's department only
+     */
+    private function getRemainingCourses($student, $transcripts)
+    {
+        // Get course codes and their latest grades
+        $courseCodeGrades = [];
+        
+        foreach ($transcripts as $transcript) {
+            $courseCode = trim(strtoupper($transcript->course->code ?? ''));
+            $grade = strtoupper(trim($transcript->grade));
+            
+            if ($courseCode && $grade) {
+                if (!isset($courseCodeGrades[$courseCode])) {
+                    $courseCodeGrades[$courseCode] = [];
+                }
+                $courseCodeGrades[$courseCode][] = $grade;
+            }
+        }
+
+        // Get the latest grade for each course
+        $finalCourseGrades = [];
+        foreach ($courseCodeGrades as $courseCode => $grades) {
+            $latestIndex = count($grades) - 1;
+            $finalCourseGrades[$courseCode] = $grades[$latestIndex];
+        }
+        
+        // Define grade categories
+        $passingGrades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-'];
+        $failingGrades = ['F', 'FF'];
+        $nonGpaGrades = ['NG', 'W', 'S', 'I', 'U', 'P', 'E', 'TS', 'T1', 'CS', 'H', 'PS', 'TU', 'TR', 'T', 'P0', 'TP', 'TF'];
+        
+        // Get passed course codes
+        $passedCourseCodes = [];
+        foreach ($finalCourseGrades as $courseCode => $grade) {
+            if (in_array($grade, $passingGrades)) {
+                $passedCourseCodes[] = $courseCode;
+            }
+        }
+        
+        // Get curriculum courses from student's department only
+        $curriculumVersion = $this->determineCurriculumVersion($student);
+        $curriculumCourses = $this->getCurriculumCourses($student, $curriculumVersion);
+        
+        // Build remaining courses list
+        $remainingCourses = collect();
+        
+        foreach ($curriculumCourses as $course) {
+            $courseCode = trim(strtoupper($course->code));
+            
+            // Skip if already passed
+            if (in_array($courseCode, $passedCourseCodes)) {
+                continue;
+            }
+            
+            // Determine status
+            $status = 'Not Taken';
+            $isRetake = false;
+            $lastGrade = null;
+            
+            if (array_key_exists($courseCode, $finalCourseGrades)) {
+                $grade = $finalCourseGrades[$courseCode];
+                $lastGrade = $grade;
+                
+                if (in_array($grade, $failingGrades)) {
+                    $status = 'Retake Required (Failed: ' . $grade . ')';
+                    $isRetake = true;
+                } elseif (in_array($grade, $nonGpaGrades)) {
+                    $status = 'Retake Required (' . $grade . ')';
+                    $isRetake = true;
+                } else {
+                    $status = 'In Progress (' . $grade . ')';
+                    $isRetake = true;
+                }
+            }
+            
+            $remainingCourses->push([
+                'code' => $course->code,
+                'title' => $course->title,
+                'credits' => $course->credits,
+                'ects_credits' => $course->ects_credits ?? $course->credits,
+                'category' => $course->category ?? 'Others',
+                'semester' => $course->semester ?? 'N/A',
+                'department_id' => $course->department_id,
+                'version' => $course->version ?? $curriculumVersion,
+                'status' => $status,
+                'is_retake' => $isRetake,
+                'last_grade' => $lastGrade,
+                'color' => $this->getCategoryColor($course->category ?? 'Others'),
+            ]);
+        }
+        
+        // Sort by semester and category
+        return $remainingCourses->sortBy([
+            ['semester', 'asc'],
+            ['category', 'asc'],
+            ['code', 'asc']
+        ])->values();
+    }
+
+    /**
+     * Get curriculum courses from student's department only
+     */
+    private function getCurriculumCourses($student, $curriculumVersion)
+    {
+        // Method 1: Try using curriculums table with version filtering (preferred)
+        $curriculumCourses = DB::table('curriculums')
+            ->join('courses', 'curriculums.course_id', '=', 'courses.id')
+            ->where('curriculums.department_id', $student->department_id)
+            ->where('curriculums.version', $curriculumVersion) // Add version filter
+            ->select(
+                'courses.id',
+                'courses.code', 
+                'courses.title',
+                'courses.credits',
+                'courses.category',
+                'courses.semester',
+                'courses.ects',
+                'courses.department_id',
+                'curriculums.version'
+            )
+            ->get();
+
+        if ($curriculumCourses->isNotEmpty()) {
+            // Convert to Course models for consistency
+            return $curriculumCourses->map(function ($course) {
+                $courseModel = new Course();
+                $courseModel->id = $course->id;
+                $courseModel->code = $course->code;
+                $courseModel->title = $course->title;
+                $courseModel->credits = $course->credits;
+                $courseModel->category = $course->category;
+                $courseModel->semester = $course->semester;
+                $courseModel->ects_credits = $course->ects; // Map ects to ects_credits
+                $courseModel->department_id = $course->department_id;
+                $courseModel->version = $course->version;
+                return $courseModel;
+            });
+        }
+
+        // Method 2: Try curriculums table without version filter (in case version column is empty)
+        $curriculumCoursesNoVersion = DB::table('curriculums')
+            ->join('courses', 'curriculums.course_id', '=', 'courses.id')
+            ->where('curriculums.department_id', $student->department_id)
+            ->select(
+                'courses.id',
+                'courses.code', 
+                'courses.title',
+                'courses.credits',
+                'courses.category',
+                'courses.semester',
+                'courses.ects',
+                'courses.department_id',
+                'curriculums.version'
+            )
+            ->get();
+
+        if ($curriculumCoursesNoVersion->isNotEmpty()) {
+            return $curriculumCoursesNoVersion->map(function ($course) {
+                $courseModel = new Course();
+                $courseModel->id = $course->id;
+                $courseModel->code = $course->code;
+                $courseModel->title = $course->title;
+                $courseModel->credits = $course->credits;
+                $courseModel->category = $course->category;
+                $courseModel->semester = $course->semester;
+                $courseModel->ects_credits = $course->ects;
+                $courseModel->department_id = $course->department_id;
+                $courseModel->version = $course->version ?? $curriculumVersion;
+                return $courseModel;
+            });
+        }
+
+        // Method 3: Fallback to courses table directly with department filter
+        return Course::where('department_id', $student->department_id)->get();
+    }
+
+    /**
+     * Determine curriculum version
+     */
+    private function determineCurriculumVersion($student)
+    {
+        // Strategy 1: Use student's entry_date if available
+        if ($student->entry_date) {
+            $entryYear = date('Y', strtotime($student->entry_date));
+            return $entryYear >= 2021 ? 'new' : 'old';
+        }
+        
+        // Strategy 2: Use student number prefix (more accurate for Turkish system)
+        $studentNumber = $student->student_number;
+        if ($studentNumber && strlen($studentNumber) >= 2) {
+            $prefix = substr($studentNumber, 0, 2);
+            
+            // Students starting with 19, 20 are old curriculum
+            if (in_array($prefix, ['19', '20'])) {
+                return 'old';
+            }
+            // Students starting with 21, 22, 23, 24, 25 are new curriculum
+            elseif (in_array($prefix, ['21', '22', '23', '24', '25'])) {
+                return 'new';
+            }
+        }
+        
+        // Strategy 3: Check first semester in transcript to determine year
+        if ($student->transcripts && $student->transcripts->isNotEmpty()) {
+            $firstSemester = $student->transcripts->sortBy('semester')->first()->semester ?? '';
+            
+            // Extract year from semester format (e.g., "2019-2020 Fall" -> 2019)
+            if (preg_match('/(\d{4})/', $firstSemester, $matches)) {
+                $year = (int)$matches[1];
+                return $year >= 2021 ? 'new' : 'old';
+            }
+        }
+        
+        // Default based on current year - if before 2021, assume old
+        return 'old'; // Changed default to 'old' for safety
+    }
+
     private function gradeToPoint($grade)
     {
         return match (strtoupper($grade)) {
-            // Standard letter grades with points (matching sample transcript)
             'A' => 4.00,
             'A-' => 3.70,
             'B+' => 3.30,
@@ -238,26 +356,10 @@ class TranscriptController extends Controller
             'D' => 1.00,
             'D-' => 0.70,
             'F' => 0.00,
+            'FF' => 0.00,
             
-            // Special grades that don't count toward GPA (return null)
-            'NG' => null,    // No Grade - doesn't count in GPA
-            'W' => null,     // Withdrawal
-            'S' => null,     // Satisfactory (Pass/No Pass)
-            'I' => null,     // Incomplete
-            'U' => null,     // Unsatisfactory
-            'P' => null,     // Pass
-            'E' => null,     // Exempt
-            'TS' => null,    // Transfer Student
-            'T1' => null,    // Transfer 1
-            'CS' => null,    // Credit by Special Exam
-            'H' => null,     // Exempt
-            'PS' => null,    // Pass
-            'TU' => null,    // Transfer U
-            'TR' => null,    // Transfer
-            'T' => null,     // Transfer
-            'P0' => null,    // Pass 0
-            'TP' => null,    // Transfer Pass
-            'TF' => null,    // Transfer Fail
+            // Special grades that don't count toward GPA
+            'NG', 'W', 'S', 'I', 'U', 'P', 'E', 'TS', 'T1', 'CS', 'H', 'PS', 'TU', 'TR', 'T', 'P0', 'TP', 'TF' => null,
             
             default => 0.00,
         };
@@ -306,7 +408,6 @@ class TranscriptController extends Controller
             $grouped[$semester]['total_ects'] = ($grouped[$semester]['total_ects'] ?? 0) + $ectsCredits;
             $grouped[$semester]['total_credits_attempted'] = ($grouped[$semester]['total_credits_attempted'] ?? 0) + $credits;
             
-            // Only count grades that contribute to GPA
             if ($gradePoint !== null) {
                 $points = $gradePoint * $credits;
                 $grouped[$semester]['grade_points'] = ($grouped[$semester]['grade_points'] ?? 0) + $points;
