@@ -13,6 +13,144 @@ use Illuminate\Support\Facades\DB;
 
 class TranscriptController extends Controller
 {
+    /**
+     * Sort semesters in chronological order with proper handling of make-up semesters
+     * Fall comes before Spring, and make-up semesters follow their main semester
+     */
+    private function sortSemesters($transcripts)
+    {
+        // Group transcripts by semester
+        $grouped = $transcripts->groupBy('semester');
+        
+        // Convert to array and sort by semester
+        $sortedSemesters = $grouped->keys()->sort(function ($a, $b) {
+            return $this->compareSemesters($a, $b);
+        });
+        
+        // Rebuild the grouped collection with sorted semesters
+        $sortedGrouped = collect();
+        foreach ($sortedSemesters as $semester) {
+            $sortedGrouped->put($semester, $grouped->get($semester));
+        }
+        
+        return $sortedGrouped;
+    }
+
+    /**
+     * Compare two semester strings for sorting
+     * Returns negative if $a should come before $b, positive if after, 0 if equal
+     */
+    private function compareSemesters($semesterA, $semesterB)
+    {
+        $parsedA = $this->parseSemester($semesterA);
+        $parsedB = $this->parseSemester($semesterB);
+        
+        // Handle special cases first
+        if ($parsedA['isSpecial'] && !$parsedB['isSpecial']) {
+            return -1; // Special semesters (like exempted) come first
+        }
+        if (!$parsedA['isSpecial'] && $parsedB['isSpecial']) {
+            return 1;
+        }
+        if ($parsedA['isSpecial'] && $parsedB['isSpecial']) {
+            return strcmp($semesterA, $semesterB); // Sort special semesters alphabetically
+        }
+        
+        // Compare years first
+        if ($parsedA['year'] !== $parsedB['year']) {
+            return $parsedA['year'] - $parsedB['year'];
+        }
+        
+        // Same year - compare main semester types
+        $semesterOrder = ['fall' => 1, 'spring' => 2, 'summer' => 3];
+        
+        if ($parsedA['mainType'] !== $parsedB['mainType']) {
+            return $semesterOrder[$parsedA['mainType']] - $semesterOrder[$parsedB['mainType']];
+        }
+        
+        // Same main semester type - handle make-up/retake semesters
+        // Main semester comes first, then make-ups
+        if ($parsedA['isMakeup'] !== $parsedB['isMakeup']) {
+            return $parsedA['isMakeup'] ? 1 : -1;
+        }
+        
+        // Both are make-ups or both are main - sort by suffix
+        return strcmp($parsedA['suffix'], $parsedB['suffix']);
+    }
+
+    /**
+     * Parse semester string into components for comparison
+     */
+    private function parseSemester($semester)
+    {
+        $semester = trim($semester);
+        
+        // Handle special cases
+        $specialCases = [
+            'Exempted Courses',
+            'English Preparatory School Exemption Test',
+            'Proficiency'
+        ];
+        
+        foreach ($specialCases as $special) {
+            if (stripos($semester, $special) !== false) {
+                return [
+                    'year' => 0,
+                    'mainType' => 'special',
+                    'isMakeup' => false,
+                    'isSpecial' => true,
+                    'suffix' => '',
+                    'original' => $semester
+                ];
+            }
+        }
+        
+        // Regular semester parsing
+        $result = [
+            'year' => 0,
+            'mainType' => 'fall', // default
+            'isMakeup' => false,
+            'isSpecial' => false,
+            'suffix' => '',
+            'original' => $semester
+        ];
+        
+        // Extract year (look for 4-digit year pattern)
+        if (preg_match('/(\d{4})/', $semester, $yearMatches)) {
+            $result['year'] = (int) $yearMatches[1];
+        }
+        
+        // Determine semester type
+        $semesterLower = strtolower($semester);
+        
+        if (stripos($semester, 'fall') !== false || stripos($semester, 'güz') !== false) {
+            $result['mainType'] = 'fall';
+        } elseif (stripos($semester, 'spring') !== false || stripos($semester, 'bahar') !== false) {
+            $result['mainType'] = 'spring';
+        } elseif (stripos($semester, 'summer') !== false || stripos($semester, 'yaz') !== false) {
+            $result['mainType'] = 'summer';
+        }
+        
+        // Check for make-up/retake patterns
+        $makeupPatterns = [
+            'bütünleme', 'butunleme', 'make-up', 'makeup', 'retake', 
+            'supplementary', 'repeat', '13-', '17-'
+        ];
+        
+        foreach ($makeupPatterns as $pattern) {
+            if (stripos($semester, $pattern) !== false) {
+                $result['isMakeup'] = true;
+                // Extract the suffix for further sorting if needed
+                if (preg_match('/(' . preg_quote($pattern, '/') . '.*)$/i', $semester, $suffixMatches)) {
+                    $result['suffix'] = $suffixMatches[1];
+                }
+                break;
+            }
+        }
+        
+        return $result;
+    }
+
     public function getTranscript($studentNumber)
     {
         $student = Student::where('student_number', $studentNumber)->first();
@@ -21,8 +159,10 @@ class TranscriptController extends Controller
             return response()->json(['message' => 'Student not found'], 404);
         }
 
-        $transcripts = $student->transcripts()->with('course')->orderBy('semester')->get();
-        $grouped = $transcripts->groupBy('semester');
+        $transcripts = $student->transcripts()->with('course')->get();
+        
+        // Sort transcripts by semester using our custom sorting
+        $sortedGrouped = $this->sortSemesters($transcripts);
 
         $structuredTranscript = [];
         $grandTotalGradePoints = 0;
@@ -30,7 +170,7 @@ class TranscriptController extends Controller
         $grandTotalECTS = 0;
         $grandTotalCreditsEarned = 0;
 
-        foreach ($grouped as $semester => $entries) {
+        foreach ($sortedGrouped as $semester => $entries) {
             $semesterGradePoints = 0;
             $semesterCredits = 0;
             $semesterCreditsEarned = 0;
@@ -382,39 +522,43 @@ class TranscriptController extends Controller
     {
         $student = Student::where('student_number', $studentNumber)->firstOrFail();
         $records = $student->transcripts()->with('course')->get();
-    
+
+        // Sort transcripts by semester
+        $sortedGrouped = $this->sortSemesters($records);
+        
         $grouped = [];
         $grandTotalCredits = 0;
         $grandTotalGradePoints = 0;
         $grandTotalECTS = 0;
         
-        foreach ($records as $record) {
-            $semester = $record->semester;
-            $grade = $record->grade;
-            $credits = $record->course->credits ?? 0;
-            $ectsCredits = $record->course->ects_credits ?? 0;
-            $gradePoint = $this->gradeToPoint($grade);
-            
-            $courseData = [
-                'code' => $record->course->code,
-                'title' => $record->course->title,
-                'grade' => $grade,
-                'credits' => $credits,
-                'ects_credits' => $ectsCredits,
-                'status' => in_array($grade, ["A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-"]) ? 'Passed' : 'Failed',
-            ];
-            
-            $grouped[$semester]['courses'][] = $courseData;
-            $grouped[$semester]['total_ects'] = ($grouped[$semester]['total_ects'] ?? 0) + $ectsCredits;
-            $grouped[$semester]['total_credits_attempted'] = ($grouped[$semester]['total_credits_attempted'] ?? 0) + $credits;
-            
-            if ($gradePoint !== null) {
-                $points = $gradePoint * $credits;
-                $grouped[$semester]['grade_points'] = ($grouped[$semester]['grade_points'] ?? 0) + $points;
-                $grouped[$semester]['total_credits'] = ($grouped[$semester]['total_credits'] ?? 0) + $credits;
+        foreach ($sortedGrouped as $semester => $semesterRecords) {
+            foreach ($semesterRecords as $record) {
+                $grade = $record->grade;
+                $credits = $record->course->credits ?? 0;
+                $ectsCredits = $record->course->ects_credits ?? 0;
+                $gradePoint = $this->gradeToPoint($grade);
+                
+                $courseData = [
+                    'code' => $record->course->code,
+                    'title' => $record->course->title,
+                    'grade' => $grade,
+                    'credits' => $credits,
+                    'ects_credits' => $ectsCredits,
+                    'status' => in_array($grade, ["A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-"]) ? 'Passed' : 'Failed',
+                ];
+                
+                $grouped[$semester]['courses'][] = $courseData;
+                $grouped[$semester]['total_ects'] = ($grouped[$semester]['total_ects'] ?? 0) + $ectsCredits;
+                $grouped[$semester]['total_credits_attempted'] = ($grouped[$semester]['total_credits_attempted'] ?? 0) + $credits;
+                
+                if ($gradePoint !== null) {
+                    $points = $gradePoint * $credits;
+                    $grouped[$semester]['grade_points'] = ($grouped[$semester]['grade_points'] ?? 0) + $points;
+                    $grouped[$semester]['total_credits'] = ($grouped[$semester]['total_credits'] ?? 0) + $credits;
+                }
             }
         }
-    
+
         foreach ($grouped as $sem => &$data) {
             $data['gpa'] = ($data['total_credits'] ?? 0) > 0 ? 
                 number_format($data['grade_points'] / $data['total_credits'], 2) : '0.00';
@@ -422,9 +566,9 @@ class TranscriptController extends Controller
             $grandTotalGradePoints += ($data['grade_points'] ?? 0);
             $grandTotalECTS += ($data['total_ects'] ?? 0);
         }
-    
+
         $cumulativeGPA = $grandTotalCredits ? number_format($grandTotalGradePoints / $grandTotalCredits, 2) : '0.00';
-    
+
         $pdf = Pdf::loadView('transcripts.pdf', [
             'student' => $student,
             'transcripts' => $grouped,
@@ -433,7 +577,7 @@ class TranscriptController extends Controller
             'totalECTS' => $grandTotalECTS,
             'totalGradePoints' => number_format($grandTotalGradePoints, 2, ',', '')
         ]);
-    
+
         return $pdf->download("transcript_{$studentNumber}.pdf");
     }
 

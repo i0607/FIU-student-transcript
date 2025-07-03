@@ -18,6 +18,7 @@ use App\Http\Controllers\TranscriptController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\CurriculumController;
 
 
 Route::get('/transcripts/{studentNumber}', [TranscriptController::class, 'getTranscript']);
@@ -47,4 +48,20 @@ Route::middleware('auth:sanctum')->get('/user/profile', function (Request $reque
     return $request->user();
 });
 
+Route::prefix('curriculum')->group(function () {
+    
+    // Get curriculum by department ID and version
+    Route::post('/search', [CurriculumController::class, 'getCurriculumByDepartmentAndVersion'])->name('curriculum.search');
+    // Get curriculum by department ID and version 
+    Route::get('/search', [CurriculumController::class, 'getCurriculumByDepartmentAndVersion'])->name('curriculum.search.get');  
+    // Get all curriculum versions for a specific department
+    Route::get('/department/{departmentId}', [CurriculumController::class, 'getCurriculumByDepartment'])
+         ->name('curriculum.by.department')
+         ->where('departmentId', '[0-9]+'); 
+    // Get available departments with their versions
+    Route::get('/departments', [CurriculumController::class, 'getAvailableDepartments'])
+         ->name('curriculum.departments');
+});
 
+// Alternative RESTful routes (if you prefer this style)
+Route::apiResource('curriculums', CurriculumController::class)->only(['index', 'show']);
