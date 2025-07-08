@@ -15,7 +15,7 @@ class CoursesSeeder extends Seeder
                // SEMESTER 1
             ['code' => 'MATH121', 'title' => 'CALCULUS-I', 'credits' => 4, 'category' => 'FC', 'semester' => 1, 'ects' => 6],
             ['code' => 'MATH123', 'title' => 'DISCRETE MATHEMATICS', 'credits' => 3, 'category' => 'FC', 'semester' => 1, 'ects' => 5],
-            ['code' => 'PHYS121', 'title' => 'PHYSICS-I', 'credits' => 4, 'category' => 'FC', 'semester' => 1, 'ects' => 5],
+            ['code' => 'PHYS121', 'title' => 'PHYSICS-I', 'credits' => 3, 'category' => 'FC', 'semester' => 1, 'ects' => 5],
             ['code' => 'ENGR101', 'title' => 'INFORMATION TECHNOLOGY AND APPLICATIONS', 'credits' => 2, 'category' => 'FC', 'semester' => 1, 'ects' => 2],
             ['code' => 'ENGR103', 'title' => 'COMPUTER PROGRAMMING-I', 'credits' => 3, 'category' => 'FC', 'semester' => 1, 'ects' => 5],
             ['code' => 'ENGL121', 'title' => 'ENGLISH-I', 'credits' => 3, 'category' => 'UC', 'semester' => 1, 'ects' => 4],
@@ -52,13 +52,14 @@ class CoursesSeeder extends Seeder
             // SEMESTER 5
             ['code' => 'CMPE321', 'title' => 'MICROPROCESSORS', 'credits' => 4, 'category' => 'AC', 'semester' => 5, 'ects' => 6],
             ['code' => 'CMPE341', 'title' => 'DATABASE SYSTEMS', 'credits' => 4, 'category' => 'AC', 'semester' => 5, 'ects' => 5],
-            ['code' => 'ELEE341', 'title' => 'ELECTRONICS-I', 'credits' => 4, 'category' => 'AC', 'semester' => 5, 'ects' => 5],
+            ['code' => 'ELEE341', 'title' => 'ELECTRONICS-I', 'credits' => 4, 'category' => 'FE', 'semester' => null, 'ects' => 6],
             ['code' => 'SFWE343', 'title' => 'SOFTWARE ANALYSIS AND DESIGN', 'credits' => 3, 'category' => 'AC', 'semester' => 5, 'ects' => 5],
+            ['code' => 'SFWE344', 'title' => 'SOFTWARE PROJECT MANAGEMENT', 'credits' => 2, 'category' => 'AC', 'semester' => 6, 'ects' => 4],
 
             // SEMESTER 6
             ['code' => 'MATH328', 'title' => 'NUMERICAL ANALYSIS', 'credits' => 3, 'category' => 'FC', 'semester' => 6, 'ects' => 6],
             ['code' => 'CMPE324', 'title' => 'COMPUTER ARCHITECTURE', 'credits' => 3, 'category' => 'AC', 'semester' => 6, 'ects' => 5],
-            ['code' => 'CMPE322', 'title' => 'DATA COMMUNICATION AND COMPUTER NETWORKS', 'credits' => 4, 'category' => 'AC', 'semester' => 6, 'ects' => 5],
+            ['code' => 'CMPE322', 'title' => 'DATA COMMUNICATION AND COMPUTER NETWORKS', 'credits' => 4, 'category' => 'FE', 'semester' => null, 'ects' => 6],
 
             // SEMESTER 7
             ['code' => 'CMPE403', 'title' => 'SUMMER TRAINING', 'credits' => 0, 'category' => 'AC', 'semester' => 7, 'ects' => 2],
@@ -70,18 +71,18 @@ class CoursesSeeder extends Seeder
             ['code' => 'ENGR404', 'title' => 'ENGINEERING ATTRIBUTES AND ETHICS', 'credits' => 2, 'category' => 'FC', 'semester' => 8, 'ects' => 3],
 
             // AREA ELECTIVE COURSES (AE)
-            ['code' => 'CMPE422', 'title' => 'REAL-TIME SYSTEMS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
-            ['code' => 'CMPE431', 'title' => 'ADVANCED COMPUTER NETWORKS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
-            ['code' => 'CMPE432', 'title' => 'WIRELESS COMMUNICATION NETWORKS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
-            ['code' => 'CMPE433', 'title' => 'WIRELESS SENSOR NETWORKS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'CMPE422', 'title' => 'REAL-TIME SYSTEMS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'CMPE431', 'title' => 'ADVANCED COMPUTER NETWORKS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'CMPE432', 'title' => 'WIRELESS COMMUNICATION NETWORKS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'CMPE433', 'title' => 'WIRELESS SENSOR NETWORKS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
             ['code' => 'CMPE434', 'title' => 'INFORMATION AND NETWORK SECURITY', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
             ['code' => 'CMPE455', 'title' => 'MODERN PROGRAMMING PLATFORMS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
-            ['code' => 'CMPE461', 'title' => 'COMPUTING SYSTEMS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
-            ['code' => 'CMPE462', 'title' => 'SERVICE-ORIENTED COMPUTING', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
-            ['code' => 'CMPE463', 'title' => 'CLOUD COMPUTING', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
-            ['code' => 'CMPE464', 'title' => 'ARTIFICIAL INTELLIGENCE', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
-            ['code' => 'CMPE465', 'title' => 'NEURAL NETWORKS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
-            ['code' => 'CMPE466', 'title' => 'EXPERT SYSTEMS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'CMPE461', 'title' => 'COMPUTING SYSTEMS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'CMPE462', 'title' => 'SERVICE-ORIENTED COMPUTING', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'CMPE463', 'title' => 'CLOUD COMPUTING', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'CMPE464', 'title' => 'ARTIFICIAL INTELLIGENCE', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'CMPE465', 'title' => 'NEURAL NETWORKS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'CMPE466', 'title' => 'EXPERT SYSTEMS', 'credits' => 4, 'category' => 'FE', 'semester' => null, 'ects' => 6],
             ['code' => 'CMPE474', 'title' => 'INTRODUCTION TO PARALLEL COMPUTING', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
             ['code' => 'CMPE475', 'title' => 'ARTIFICIAL INTELLIGENCE TOOLS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
             ['code' => 'CMPE476', 'title' => 'DIGITAL FORENSICS AND INVESTIGATIONS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
@@ -91,12 +92,14 @@ class CoursesSeeder extends Seeder
             ['code' => 'CHEM121', 'title' => 'CHEMISTRY', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 5],
             ['code' => 'MATH228', 'title' => 'ENGINEERING MATHEMATICS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
             ['code' => 'ELEE331', 'title' => 'SIGNALS AND SYSTEMS', 'credits' => 4, 'category' => 'FE', 'semester' => null, 'ects' => 6],
-            ['code' => 'ELEE362', 'title' => 'COMMUNICATION SYSTEMS', 'credits' => 4, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'ELEE362', 'title' => 'COMMUNICATION SYSTEMS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 5],
             ['code' => 'ELEE431', 'title' => 'DIGITAL SIGNAL PROCESSING', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
-            ['code' => 'SFWE315', 'title' => 'VISUAL PROGRAMMING', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
-            ['code' => 'SFWE316', 'title' => 'INTERNET AND WEB PROGRAMMING', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
-            ['code' => 'SFWE415', 'title' => 'SOFTWARE ARCHITECTURE', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
-            ['code' => 'SFWE411', 'title' => 'SOFTWARE VALIDATION & TESTING', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE315', 'title' => 'VISUAL PROGRAMMING', 'credits' => 3, 'category' => 'AC', 'semester' => 5, 'ects' => 5],
+            ['code' => 'SFWE316', 'title' => 'CRYPTOGRAPHY', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE434', 'title' => 'INTERNET AND WEB PROGRAMMING', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE415', 'title' => 'SOFTWARE ARCHITECTURE', 'credits' => 3, 'category' => 'AC', 'semester' => 7, 'ects' => 6],
+            ['code' => 'SFWE411', 'title' => 'SOFTWARE VALIDATION & TESTING', 'credits' => 3, 'category' => 'AC', 'semester' => 8, 'ects' => 6],
+            ['code' => 'SFWE403', 'title' => 'SUMMER TRAINING', 'credits' => 0, 'category' => 'AC', 'semester' => 7, 'ects' => 2],
             ['code' => 'AINE301', 'title' => 'BASIC SEARCH METHODS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 5],
             ['code' => 'AINE312', 'title' => 'DATA SCIENCE', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 5],
             ['code' => 'AINE334', 'title' => 'KNOWLEDGE REPRESENTATION AND REASONING', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 5],
@@ -217,16 +220,21 @@ class CoursesSeeder extends Seeder
             ['code' => 'AINE481', 'title' => 'ETHICS OF ARTIFICIAL INTELLIGENCE', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
 
             // FACULTY ELECTIVES (NEW)
-            ['code' => 'ENGRXX1', 'title' => 'FACULTY ELECTIVE', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 5],
-            ['code' => 'ENGRXX2', 'title' => 'FACULTY ELECTIVE', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 5],
-            ['code' => 'ENGRXX3', 'title' => 'FACULTY ELECTIVE', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 5],
-            ['code' => 'ENGRXX4', 'title' => 'FACULTY ELECTIVE', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 5],
+            ['code' => 'ENGRXX1', 'title' => 'FACULTY ELECTIVE', 'credits' => 3, 'category' => 'FE', 'semester' => 5, 'ects' => 5],
+            ['code' => 'ENGRXX2', 'title' => 'FACULTY ELECTIVE', 'credits' => 3, 'category' => 'FE', 'semester' => 6, 'ects' => 5],
+            ['code' => 'ENGRXX3', 'title' => 'FACULTY ELECTIVE', 'credits' => 3, 'category' => 'FE', 'semester' => 6, 'ects' => 5],
+            ['code' => 'ENGRXX4', 'title' => 'FACULTY ELECTIVE', 'credits' => 3, 'category' => 'FE', 'semester' => 8, 'ects' => 5],
 
             // UNIVERSITY ELECTIVES (NEW)
-            ['code' => 'UNIEXX1', 'title' => 'UNIVERSITY ELECTIVE', 'credits' => 3, 'category' => 'UE', 'semester' => null, 'ects' => 4],
-            ['code' => 'UNIEXX2', 'title' => 'UNIVERSITY ELECTIVE', 'credits' => 3, 'category' => 'UE', 'semester' => null, 'ects' => 4],
-            ['code' => 'UNIEXX3', 'title' => 'UNIVERSITY ELECTIVE', 'credits' => 3, 'category' => 'UE', 'semester' => null, 'ects' => 4],
-            ['code' => 'UNIEXX4', 'title' => 'UNIVERSITY ELECTIVE', 'credits' => 3, 'category' => 'UE', 'semester' => null, 'ects' => 4],
+            ['code' => 'UNIEXX1', 'title' => 'UNIVERSITY ELECTIVE', 'credits' => 3, 'category' => 'UE', 'semester' => 3, 'ects' => 4],
+            ['code' => 'UNIEXX2', 'title' => 'UNIVERSITY ELECTIVE', 'credits' => 3, 'category' => 'UE', 'semester' => 5, 'ects' => 4],
+            ['code' => 'UNIEXX3', 'title' => 'UNIVERSITY ELECTIVE', 'credits' => 3, 'category' => 'UE', 'semester' => 6, 'ects' => 4],
+            ['code' => 'UNIEXX4', 'title' => 'UNIVERSITY ELECTIVE', 'credits' => 3, 'category' => 'UE', 'semester' => 7, 'ects' => 4],
+            // AREA ELECTIVES (NEW)
+            ['code' => 'SFWEXX1', 'title' => 'AREA ELECTIVE', 'credits' => 3, 'category' => 'AE', 'semester' => 6, 'ects' => 6],
+            ['code' => 'SFWEXX2', 'title' => 'AREA ELECTIVE', 'credits' => 3, 'category' => 'AE', 'semester' => 7, 'ects' => 6],
+            ['code' => 'SFWEXX3', 'title' => 'AREA ELECTIVE', 'credits' => 3, 'category' => 'AE', 'semester' => 7, 'ects' => 6],
+            ['code' => 'SFWEXX4', 'title' => 'AREA ELECTIVE', 'credits' => 3, 'category' => 'AE', 'semester' => 8, 'ects' => 6],
 
             // ELECTRICAL/ELECTRONIC ELECTIVES FROM CURRICULUM
             ['code' => 'ELEE434', 'title' => 'DIGITAL CONTROL SYSTEMS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
@@ -246,7 +254,16 @@ class CoursesSeeder extends Seeder
             // SOFTWARE ENGINEERING AREA ELECTIVES (FROM CURRICULUM)
             ['code' => 'SFWE431', 'title' => 'HUMAN COMPUTER INTERACTION', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
             ['code' => 'SFWE412', 'title' => 'SOFTWARE QUALITY ASSURANCE', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
-            ['code' => 'SFWE466', 'title' => 'EXPERT SYSTEMS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE422', 'title' => ' MOBILE APPLICATION DEVELOPMENT', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE441', 'title' => 'ADVANCE DATABASE', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE442', 'title' => 'OBJECT-ORIENTED PROGRAMMING LANGUAGE AND SYSTEMS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE444', 'title' => 'SOFTWARE CONSTRUCTION', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE445', 'title' => 'RAPID APPLICATION DEVELOPMENT', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE451', 'title' => 'INFORMATION RETRIEVAL', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE468', 'title' => 'PROCESS MINING', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE467', 'title' => 'DATA MINING', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE472', 'title' => 'COMPUTER GRAPHICS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE474', 'title' => 'INTRODUCTION TO PARALLEL COMPUTING', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
 
             // MISSING PREP COURSES (if not already in your system)
             ['code' => 'PREP101', 'title' => 'ENGLISH PREP SCHOOL (A1-A1+)', 'credits' => 0, 'category' => 'UC', 'semester' => null, 'ects' => 0],

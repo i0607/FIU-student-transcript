@@ -501,6 +501,20 @@ class CurriculumSeeder extends Seeder
         'department_title' => 'Software Engineering (English)',
         'version' => 'Old'
     ],
+    [
+        'faculty_id' => $engineeringFacultyId,
+        'department_id' => $softwareEngDeptId,
+        'course_id' => DB::table('courses')->where('code', 'TE1')->value('id'),
+        'course_category' => 'AE',
+        'title' => 'Technical Elective I ',
+        'lecture_hours' => 3,
+        'lab_hours' => 0,
+        'total_credits' => 3,
+        'pre_requisite' => null,
+        'ects' => 5,
+        'department_title' => 'Software Engineering (English)',
+        'version' => 'Old'
+    ],
 
     // YEAR 4 - FALL SEMESTER (Semester 7)
     [
@@ -1525,34 +1539,7 @@ class CurriculumSeeder extends Seeder
                 'version' => 'New',
                 'ects' => 5
             ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'SFWE472')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'SFWE472')->value('category'),
-                'title' => 'COMPUTER GRAPHICS',
-                'lecture_hours' => 3,
-                'lab_hours' => 0,
-                'total_credits' => 3,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 6
-            ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'SFWE474')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'SFWE474')->value('category'),
-                'title' => 'INTRODUCTION TO PARALLEL COMPUTING',
-                'lecture_hours' => 3,
-                'lab_hours' => 0,
-                'total_credits' => 3,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 6
-            ],
+
 
             // Faculty Elective Courses - Software Engineering
             [
@@ -1583,6 +1570,49 @@ class CurriculumSeeder extends Seeder
                 'version' => 'New',
                 'ects' => 6
             ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ELEE341')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ELEE341')->value('category'),
+                'title' => 'ELECTRONICS-I',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 4,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering',
+                'version' => 'New',
+                'ects' => 6
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ELEE431')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ELEE431')->value('category'),
+                'title' => 'DIGITAL SIGNAL PROCESSING',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering',
+                'version' => 'New',
+                'ects' => 6
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ELEE362')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ELEE362')->value('category'),
+                'title' => 'COMMUNICATION SYSTEMS',
+                'lecture_hours' => 3,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering',
+                'version' => 'New',
+                'ects' => 5
+            ],
+
             [
                 'faculty_id' => 1,
                 'department_id' => 1,
@@ -1656,6 +1686,20 @@ class CurriculumSeeder extends Seeder
             [
                 'faculty_id' => 1,
                 'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'UNIEXX1')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'UNIEXX1')->value('category'),
+                'title' => 'UNIVERSITY ELECTIVE',
+                'lecture_hours' => 0,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering',
+                'version' => 'New',
+                'ects' => 4
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
                 'course_id' => DB::table('courses')->where('code', 'CMPE465')->value('id'),
                 'course_category' => DB::table('courses')->where('code', 'CMPE465')->value('category'),
                 'title' => 'NEURAL NETWORKS',
@@ -1709,20 +1753,7 @@ class CurriculumSeeder extends Seeder
                 'version' => 'New',
                 'ects' => 6
             ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'ELEE341')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'ELEE341')->value('category'),
-                'title' => 'ELECTRONICS-I',
-                'lecture_hours' => 3,
-                'lab_hours' => 2,
-                'total_credits' => 4,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 6
-            ],
+
             [
                 'faculty_id' => 1,
                 'department_id' => 1,
@@ -1737,13 +1768,14 @@ class CurriculumSeeder extends Seeder
                 'version' => 'New',
                 'ects' => 5
             ],
+
             [
                 'faculty_id' => 1,
                 'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'ELEE362')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'ELEE362')->value('category'),
-                'title' => 'COMMUNICATION SYSTEMS',
-                'lecture_hours' => 3,
+                'course_id' => DB::table('courses')->where('code', 'ENGRXX1')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ENGRXX1')->value('category'),
+                'title' => 'FACULTY ELECTIVE',
+                'lecture_hours' => 0,
                 'lab_hours' => 0,
                 'total_credits' => 3,
                 'pre_requisite' => null,
@@ -1754,17 +1786,19 @@ class CurriculumSeeder extends Seeder
             [
                 'faculty_id' => 1,
                 'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'ELEE431')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'ELEE431')->value('category'),
-                'title' => 'DIGITAL SIGNAL PROCESSING',
-                'lecture_hours' => 3,
+                'course_id' => DB::table('courses')->where('code', 'UNIEXX2')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'UNIEXX2')->value('category'),
+                'title' => 'UNIVERSITY ELECTIVE',
+                'lecture_hours' => 0,
                 'lab_hours' => 0,
                 'total_credits' => 3,
-                'pre_requisite' => 'ELEE331',
+                'pre_requisite' => null,
                 'department_title' => 'Software Engineering',
                 'version' => 'New',
-                'ects' => 6
+                'ects' => 4
             ],
+
+
             [
                 'faculty_id' => 1,
                 'department_id' => 1,
@@ -1809,34 +1843,7 @@ class CurriculumSeeder extends Seeder
                 'version' => 'New',
                 'ects' => 3
             ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'TURK131')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'TURK131')->value('category'),
-                'title' => 'TURKISH AS A FOREIGN LANGUAGE-I',
-                'lecture_hours' => 2,
-                'lab_hours' => 0,
-                'total_credits' => 2,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 3
-            ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'TURK132')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'TURK132')->value('category'),
-                'title' => 'TURKISH AS A FOREIGN LANGUAGE-II',
-                'lecture_hours' => 2,
-                'lab_hours' => 0,
-                'total_credits' => 2,
-                'pre_requisite' => 'TURK131',
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 3
-            ],
+            
             [
                 'faculity_id' => 1,
                 'department_id' => 1,
@@ -2314,6 +2321,62 @@ class CurriculumSeeder extends Seeder
             [
                 'faculty_id' => 1,
                 'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWEXX1')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWEXX1')->value('category'),
+                'title' => 'AREA ELECTIVE',
+                'lecture_hours' => 0,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering',
+                'version' => 'New',
+                'ects' => 6
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ENGRXX2')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ENGRXX2')->value('category'),
+                'title' => 'FACULTY ELECTIVE',
+                'lecture_hours' => 0,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering',
+                'version' => 'New',
+                'ects' => 5
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ENGRXX3')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ENGRXX3')->value('category'),
+                'title' => 'FACULTY ELECTIVE',
+                'lecture_hours' => 0,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering',
+                'version' => 'New',
+                'ects' => 5
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'UNIEXX3')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'UNIEXX3')->value('category'),
+                'title' => 'UNIVERSITY ELECTIVE',
+                'lecture_hours' => 0,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering',
+                'version' => 'New',
+                'ects' => 4
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
                 'course_id' => DB::table('courses')->where('code', 'MATH328')->value('id'),
                 'course_category' => DB::table('courses')->where('code', 'MATH328')->value('category'),
                 'title' => 'NUMERICAL ANALYSIS',
@@ -2369,6 +2432,48 @@ class CurriculumSeeder extends Seeder
                 'version' => 'New',
                 'ects' => 6
             ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWEXX2')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWEXX2')->value('category'),
+                'title' => 'AREA ELECTIVE',
+                'lecture_hours' => 0,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering',
+                'version' => 'New',
+                'ects' => 6
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWEXX3')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWEXX3')->value('category'),
+                'title' => 'AREA ELECTIVE',
+                'lecture_hours' => 0,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering',
+                'version' => 'New',
+                'ects' => 6
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'UNIEXX4')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'UNIEXX4')->value('category'),
+                'title' => 'UNIVERSITY ELECTIVE',
+                'lecture_hours' => 0,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering',
+                'version' => 'New',
+                'ects' => 4
+            ],
 
             // Semester 8 Courses - Software Engineering
             [
@@ -2412,6 +2517,34 @@ class CurriculumSeeder extends Seeder
                 'department_title' => 'Software Engineering',
                 'version' => 'New',
                 'ects' => 3
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'SFWEXX4')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'SFWEXX4')->value('category'),
+                'title' => 'AREA ELECTIVE',
+                'lecture_hours' => 0,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering',
+                'version' => 'New',
+                'ects' => 6
+            ],
+            [
+                'faculty_id' => 1,
+                'department_id' => 1,
+                'course_id' => DB::table('courses')->where('code', 'ENGRXX4')->value('id'),
+                'course_category' => DB::table('courses')->where('code', 'ENGRXX4')->value('category'),
+                'title' => 'FACULTY ELECTIVE',
+                'lecture_hours' => 0,
+                'lab_hours' => 0,
+                'total_credits' => 3,
+                'pre_requisite' => null,
+                'department_title' => 'Software Engineering',
+                'version' => 'New',
+                'ects' => 5
             ],
 
             // Area Elective Courses - Software Engineering
@@ -2613,260 +2746,11 @@ class CurriculumSeeder extends Seeder
             ],
 
             // Faculty Elective Courses
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'CMPE431')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'CMPE431')->value('category'),
-                'title' => 'ADVANCED COMPUTER NETWORKS',
-                'lecture_hours' => 3,
-                'lab_hours' => 0,
-                'total_credits' => 3,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 6
-            ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'CMPE432')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'CMPE432')->value('category'),
-                'title' => 'WIRELESS COMMUNICATION NETWORKS',
-                'lecture_hours' => 3,
-                'lab_hours' => 0,
-                'total_credits' => 3,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 6
-            ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'CMPE433')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'CMPE433')->value('category'),
-                'title' => 'WIRELESS SENSOR NETWORKS',
-                'lecture_hours' => 3,
-                'lab_hours' => 0,
-                'total_credits' => 3,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 6
-            ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'CMPE461')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'CMPE461')->value('category'),
-                'title' => 'COMPUTING SYSTEMS',
-                'lecture_hours' => 3,
-                'lab_hours' => 0,
-                'total_credits' => 3,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 6
-            ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'CMPE462')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'CMPE462')->value('category'),
-                'title' => 'SERVICE-ORIENTED COMPUTING',
-                'lecture_hours' => 3,
-                'lab_hours' => 0,
-                'total_credits' => 3,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 6
-            ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'CMPE463')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'CMPE463')->value('category'),
-                'title' => 'CLOUD COMPUTING',
-                'lecture_hours' => 3,
-                'lab_hours' => 0,
-                'total_credits' => 3,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 6
-            ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'CMPE464')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'CMPE464')->value('category'),
-                'title' => 'ARTIFICIAL INTELLIGENCE',
-                'lecture_hours' => 3,
-                'lab_hours' => 0,
-                'total_credits' => 3,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 6
-            ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'CMPE465')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'CMPE465')->value('category'),
-                'title' => 'NEURAL NETWORKS',
-                'lecture_hours' => 3,
-                'lab_hours' => 0,
-                'total_credits' => 3,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 6
-            ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'CMPE466')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'CMPE466')->value('category'),
-                'title' => 'EXPERT SYSTEMS',
-                'lecture_hours' => 3,
-                'lab_hours' => 0,
-                'total_credits' => 4,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 6
-            ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'CHEM121')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'CHEM121')->value('category'),
-                'title' => 'CHEMISTRY',
-                'lecture_hours' => 2,
-                'lab_hours' => 3,
-                'total_credits' => 3,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 5
-            ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'MATH228')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'MATH228')->value('category'),
-                'title' => 'ENGINEERING MATHEMATICS',
-                'lecture_hours' => 3,
-                'lab_hours' => 1,
-                'total_credits' => 3,
-                'pre_requisite' => 'MATH122, MATH124',
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 6
-            ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'ELEE341')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'ELEE341')->value('category'),
-                'title' => 'ELECTRONICS-I',
-                'lecture_hours' => 3,
-                'lab_hours' => 2,
-                'total_credits' => 4,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 6
-            ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'ELEE331')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'ELEE331')->value('category'),
-                'title' => 'SIGNALS AND SYSTEMS',
-                'lecture_hours' => 3,
-                'lab_hours' => 2,
-                'total_credits' => 4,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 5
-            ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'ELEE362')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'ELEE362')->value('category'),
-                'title' => 'COMMUNICATION SYSTEMS',
-                'lecture_hours' => 3,
-                'lab_hours' => 0,
-                'total_credits' => 3,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 5
-            ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'ELEE431')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'ELEE431')->value('category'),
-                'title' => 'DIGITAL SIGNAL PROCESSING',
-                'lecture_hours' => 3,
-                'lab_hours' => 0,
-                'total_credits' => 3,
-                'pre_requisite' => 'ELEE331',
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 6
-            ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'CMPE322')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'CMPE322')->value('category'),
-                'title' => 'DATA COMMUNICATION AND COMPUTER NETWORKS',
-                'lecture_hours' => 3,
-                'lab_hours' => 2,
-                'total_credits' => 4,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 6
-            ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'MECE215')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'MECE215')->value('category'),
-                'title' => 'BASIC MECHANICS: STATICS',
-                'lecture_hours' => 3,
-                'lab_hours' => 1,
-                'total_credits' => 3,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 5
-            ],
+
+
 
             // Alternative courses (HIST111, TURK131, TURK132) - if needed
-            [
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'course_id' => DB::table('courses')->where('code', 'HIST111')->value('id'),
-                'course_category' => DB::table('courses')->where('code', 'HIST111')->value('category'),
-                'title' => 'ATATURK\'S PRINCIPLES AND HISTORY OF TURKISH REFORMS-I',
-                'lecture_hours' => 2,
-                'lab_hours' => 0,
-                'total_credits' => 2,
-                'pre_requisite' => null,
-                'department_title' => 'Software Engineering',
-                'version' => 'New',
-                'ects' => 3
-            ],
+
             [
                 'faculty_id' => 1,
                 'department_id' => 1,
@@ -2930,6 +2814,7 @@ class CurriculumSeeder extends Seeder
                 'department_title' => 'Artificial Intelligence Engineering',
                 'version' => 'New'
             ],
+  
             [
                 'faculty_id' => 1,
                 'department_id' => 5,
@@ -3272,20 +3157,7 @@ class CurriculumSeeder extends Seeder
                 'department_title' => 'Artificial Intelligence Engineering',
                 'version' => 'New'
             ],
-            [
-                'faculty_id' => 1,
-                'department_id' => 5,
-                'course_id' => DB::table('courses')->where('code', 'MATH123')->value('id'),
-                'course_category' => 'FC',
-                'title' => 'DISCRETE MATHEMATICS',
-                'lecture_hours' => 3,
-                'lab_hours' => 1,
-                'total_credits' => 3,
-                'pre_requisite' => null,
-                'ects' => 5,
-                'department_title' => 'Artificial Intelligence Engineering',
-                'version' => 'New'
-            ],
+
             [
                 'faculty_id' => 1,
                 'department_id' => 5,

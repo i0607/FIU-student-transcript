@@ -133,6 +133,7 @@ function Navbar() {
   // Navigation links based on user role
   const navigationLinks = [
     { text: 'Transcript', path: '/transcript' },
+    { text: 'Curriculum', path: '/curriculum' },
     ...(role === 'admin' ? [
       { text: 'Dashboard', path: '/admin/dashboard' },
       { text: 'Admin Panel', path: '/admin' },

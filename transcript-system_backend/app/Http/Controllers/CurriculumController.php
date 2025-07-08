@@ -38,7 +38,7 @@ class CurriculumController extends Controller
                 ], 404);
             }
 
-            // Get curriculum data with course details
+            // Get curriculum data with course details and proper ordering
             $curriculumData = DB::table('curriculums')
                 ->join('courses', 'curriculums.course_id', '=', 'courses.id')
                 ->join('faculties', 'curriculums.faculty_id', '=', 'faculties.id')
@@ -54,8 +54,8 @@ class CurriculumController extends Controller
                     'courses.ects as course_ects',
                     'faculties.title as faculty_title'
                 ])
-                ->orderBy('courses.semester')
-                ->orderBy('courses.category')
+                ->orderByRaw($this->getCategoryOrderSql())
+                ->orderByRaw($this->getSemesterOrderSql()) // Fixed semester ordering
                 ->orderBy('courses.code')
                 ->get();
 
@@ -150,8 +150,8 @@ class CurriculumController extends Controller
                         'courses.ects as course_ects',
                         'faculties.title as faculty_title'
                     ])
-                    ->orderBy('courses.semester')
-                    ->orderBy('courses.category')
+                    ->orderByRaw($this->getCategoryOrderSql())
+                    ->orderByRaw($this->getSemesterOrderSql()) // Fixed semester ordering
                     ->orderBy('courses.code')
                     ->get();
 
@@ -235,6 +235,38 @@ class CurriculumController extends Controller
     }
 
     /**
+     * Get SQL for category ordering: AC, FC, UC, AE, FE, UE
+     * 
+     * @return string
+     */
+    private function getCategoryOrderSql()
+    {
+        return "CASE courses.category 
+                    WHEN 'AC' THEN 1 
+                    WHEN 'FC' THEN 2 
+                    WHEN 'UC' THEN 3 
+                    WHEN 'AE' THEN 4 
+                    WHEN 'FE' THEN 5 
+                    WHEN 'UE' THEN 6 
+                    ELSE 7 
+                END";
+    }
+
+    /**
+     * Get SQL for proper semester ordering - Fixed to handle numeric sorting properly
+     * 
+     * @return string
+     */
+    private function getSemesterOrderSql()
+    {
+        return "CASE 
+                    WHEN courses.semester IS NULL OR courses.semester = '' OR courses.semester = 'Elective' THEN 999
+                    WHEN courses.semester REGEXP '^[0-9]+$' THEN CAST(courses.semester AS UNSIGNED)
+                    ELSE 999
+                END";
+    }
+
+    /**
      * Group courses by semester and category
      * 
      * @param \Illuminate\Support\Collection $curriculumData
@@ -242,24 +274,35 @@ class CurriculumController extends Controller
      */
     private function groupCoursesBySemesterAndCategory($curriculumData)
     {
-        // Group by semester
+        // Group by semester with proper ordering
         $bySemester = $curriculumData->groupBy('course_semester')->map(function ($courses, $semester) {
+            // Sort courses within each semester by category priority
+            $sortedCourses = $courses->sortBy(function ($course) {
+                return $this->getCategoryPriority($course->course_category);
+            })->values();
+
             return [
                 'semester' => $semester ?: 'Elective',
-                'courses' => $courses->map(function ($course) {
+                'courses' => $sortedCourses->map(function ($course) {
                     return $this->formatSingleCourse($course);
                 })->values(),
                 'total_credits' => $courses->sum('course_credits'),
                 'total_ects' => $courses->sum('course_ects'),
                 'course_count' => $courses->count()
             ];
+        });
+
+        // Sort semesters properly
+        $sortedBySemester = $bySemester->sort(function ($a, $b) {
+            return $this->compareSemesters($a['semester'], $b['semester']);
         })->values();
 
-        // Group by category
+        // Group by category and sort categories by priority
         $byCategory = $curriculumData->groupBy('course_category')->map(function ($courses, $category) {
             return [
                 'category' => $category ?: 'Others',
                 'category_name' => $this->getCategoryName($category),
+                'category_priority' => $this->getCategoryPriority($category),
                 'courses' => $courses->map(function ($course) {
                     return $this->formatSingleCourse($course);
                 })->values(),
@@ -267,16 +310,65 @@ class CurriculumController extends Controller
                 'total_ects' => $courses->sum('course_ects'),
                 'course_count' => $courses->count()
             ];
-        })->values();
+        })->sortBy('category_priority')->values();
 
         return [
-            'by_semester' => $bySemester,
+            'by_semester' => $sortedBySemester,
             'by_category' => $byCategory
         ];
     }
 
     /**
-     * Calculate curriculum statistics
+     * Compare semesters for proper ordering
+     * 
+     * @param string $semesterA
+     * @param string $semesterB
+     * @return int
+     */
+    private function compareSemesters($semesterA, $semesterB)
+    {
+        // Handle null/empty/elective cases
+        if (($semesterA === null || $semesterA === '' || $semesterA === 'Elective') && 
+            ($semesterB === null || $semesterB === '' || $semesterB === 'Elective')) {
+            return 0;
+        }
+        
+        if ($semesterA === null || $semesterA === '' || $semesterA === 'Elective') {
+            return 1; // Put electives at the end
+        }
+        
+        if ($semesterB === null || $semesterB === '' || $semesterB === 'Elective') {
+            return -1; // Put electives at the end
+        }
+
+        // Convert to numeric values for comparison
+        $numA = is_numeric($semesterA) ? (int)$semesterA : 999;
+        $numB = is_numeric($semesterB) ? (int)$semesterB : 999;
+
+        return $numA - $numB;
+    }
+
+    /**
+     * Get category priority for sorting: AC=1, FC=2, UC=3, AE=4, FE=5, UE=6
+     * 
+     * @param string $category
+     * @return int
+     */
+    private function getCategoryPriority($category)
+    {
+        return match (strtoupper($category ?? '')) {
+            'AC' => 1,
+            'FC' => 2,
+            'UC' => 3,
+            'AE' => 4,
+            'FE' => 5,
+            'UE' => 6,
+            default => 7
+        };
+    }
+
+    /**
+     * Calculate curriculum statistics with proper semester ordering
      * 
      * @param \Illuminate\Support\Collection $curriculumData
      * @return array
@@ -291,11 +383,12 @@ class CurriculumController extends Controller
             return [
                 'category' => $category ?: 'Others',
                 'category_name' => $this->getCategoryName($category),
+                'category_priority' => $this->getCategoryPriority($category),
                 'count' => $courses->count(),
                 'credits' => $courses->sum('course_credits'),
                 'ects' => $courses->sum('course_ects')
             ];
-        })->values();
+        })->sortBy('category_priority')->values();
 
         $semesterCounts = $curriculumData->groupBy('course_semester')->map(function ($courses, $semester) {
             return [
@@ -304,6 +397,8 @@ class CurriculumController extends Controller
                 'credits' => $courses->sum('course_credits'),
                 'ects' => $courses->sum('course_ects')
             ];
+        })->sort(function ($a, $b) {
+            return $this->compareSemesters($a['semester'], $b['semester']);
         })->values();
 
         return [

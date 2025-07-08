@@ -11,6 +11,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import DepartmentPage from './pages/DepartmentPage';
 import ProfilePage from "./pages/ProfilePage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
+import CurriculumPage from './components/CurriculumPage'; // Add this import
 
 function AppContent() {
   const location = useLocation();
@@ -33,7 +34,12 @@ function AppContent() {
             </ProtectedRoute>
           }
         />
-
+          <Route path="/curriculum" element={
+            <ProtectedRoute>
+              <Navbar />
+              <CurriculumPage />
+            </ProtectedRoute>
+          } />
         {/* Admin only accessible route */}
         <Route
           path="/admin"
