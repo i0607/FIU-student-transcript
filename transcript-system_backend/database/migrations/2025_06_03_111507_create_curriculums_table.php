@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('title');
             $table->integer('lecture_hours')->nullable();
             $table->integer('lab_hours')->nullable();
+            $table->integer('tutorial')->nullable();
             $table->integer('total_credits');
             $table->string('pre_requisite')->nullable();
             $table->integer('ects')->nullable();

@@ -10,4 +10,9 @@ class Student extends Model
     public function transcripts() {
         return $this->hasMany(Transcript::class);
     }
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    
+}
 }

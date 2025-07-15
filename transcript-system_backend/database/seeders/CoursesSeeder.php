@@ -21,6 +21,9 @@ class CoursesSeeder extends Seeder
             ['code' => 'ENGL121', 'title' => 'ENGLISH-I', 'credits' => 3, 'category' => 'UC', 'semester' => 1, 'ects' => 4],
             ['code' => 'TURK131', 'title' => 'TURKISH AS A FOREIGN LANGUAGE-I', 'credits' => 2, 'category' => 'UC', 'semester' => 1, 'ects' => 3],
             ['code' => 'TUOG101', 'title' => 'TURKISH LANGUAGE-I', 'credits' => 2, 'category' => 'UC', 'semester' => 1, 'ects' => 3],
+            ['code' => 'TUOG101/TURK131', 'title' => 'TURKISH LANGUAGE-I/TURKISH AS A FOREIGN LANGUAGE-I', 'credits' => 2, 'category' => 'UC', 'semester' => 1, 'ects' => 3],
+            ['code' => 'TARH101/HIST111', 'title' => ' ATATURKS PRINCIPLES AND HISTORY OF TURKISH REFORMS-I', 'credits' => 2, 'category' => 'UC', 'semester' => 2, 'ects' => 3],
+            ['code' => 'TUOG102/TURK132', 'title' => 'TURKISH LANGUAGE-I/TURKISH AS A FOREIGN LANGUAGE-I', 'credits' => 2, 'category' => 'UC', 'semester' => 2, 'ects' => 3],
 
             // SEMESTER 2
             ['code' => 'MATH122', 'title' => 'CALCULUS-II', 'credits' => 4, 'category' => 'FC', 'semester' => 2, 'ects' => 6],
@@ -52,6 +55,7 @@ class CoursesSeeder extends Seeder
             // SEMESTER 5
             ['code' => 'CMPE321', 'title' => 'MICROPROCESSORS', 'credits' => 4, 'category' => 'AC', 'semester' => 5, 'ects' => 6],
             ['code' => 'CMPE341', 'title' => 'DATABASE SYSTEMS', 'credits' => 4, 'category' => 'AC', 'semester' => 5, 'ects' => 5],
+            ['code' => 'ELEE341', 'title' => 'ELECTRONICS-I', 'credits' => 4, 'category' => 'FE', 'semester' => 5, 'ects' => 6],
             ['code' => 'ELEE341', 'title' => 'ELECTRONICS-I', 'credits' => 4, 'category' => 'FE', 'semester' => null, 'ects' => 6],
             ['code' => 'SFWE343', 'title' => 'SOFTWARE ANALYSIS AND DESIGN', 'credits' => 3, 'category' => 'AC', 'semester' => 5, 'ects' => 5],
             ['code' => 'SFWE344', 'title' => 'SOFTWARE PROJECT MANAGEMENT', 'credits' => 2, 'category' => 'AC', 'semester' => 6, 'ects' => 4],
@@ -59,12 +63,17 @@ class CoursesSeeder extends Seeder
             // SEMESTER 6
             ['code' => 'MATH328', 'title' => 'NUMERICAL ANALYSIS', 'credits' => 3, 'category' => 'FC', 'semester' => 6, 'ects' => 6],
             ['code' => 'CMPE324', 'title' => 'COMPUTER ARCHITECTURE', 'credits' => 3, 'category' => 'AC', 'semester' => 6, 'ects' => 5],
+            ['code' => 'CMPE322', 'title' => 'DATA COMMUNICATION AND COMPUTER NETWORKS', 'credits' => 4, 'category' => 'FE', 'semester' => 6, 'ects' => 6],
             ['code' => 'CMPE322', 'title' => 'DATA COMMUNICATION AND COMPUTER NETWORKS', 'credits' => 4, 'category' => 'FE', 'semester' => null, 'ects' => 6],
 
             // SEMESTER 7
             ['code' => 'CMPE403', 'title' => 'SUMMER TRAINING', 'credits' => 0, 'category' => 'AC', 'semester' => 7, 'ects' => 2],
             ['code' => 'ENGR401', 'title' => 'ENGINEERING DESIGN-I', 'credits' => 2, 'category' => 'FC', 'semester' => 7, 'ects' => 6],
             ['code' => 'CMPE421', 'title' => 'PROGRAMMING LANGUAGES', 'credits' => 3, 'category' => 'AC', 'semester' => 7, 'ects' => 6],
+            ['code' => 'CMPEXX1', 'title' => 'AREA ELECTIVE', 'credits' => 3, 'category' => 'AE', 'semester' => 7, 'ects' => 2],
+            ['code' => 'CMPEXX2', 'title' => 'AREA ELECTIVE', 'credits' => 3, 'category' => 'AE', 'semester' => 7, 'ects' => 6],
+            ['code' => 'CMPEXX3', 'title' => 'AREA ELECTIVE', 'credits' => 3, 'category' => 'AE', 'semester' => 8, 'ects' => 6],
+            ['code' => 'CMPEXX4', 'title' => 'AREA ELECTIVE', 'credits' => 3, 'category' => 'AE', 'semester' => 8, 'ects' => 6],
 
             // SEMESTER 8
             ['code' => 'ENGR402', 'title' => 'ENGINEERING DESIGN-II', 'credits' => 2, 'category' => 'FC', 'semester' => 8, 'ects' => 10],
@@ -72,6 +81,7 @@ class CoursesSeeder extends Seeder
 
             // AREA ELECTIVE COURSES (AE)
             ['code' => 'CMPE422', 'title' => 'REAL-TIME SYSTEMS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'CMPE422', 'title' => 'REAL-TIME SYSTEMS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
             ['code' => 'CMPE431', 'title' => 'ADVANCED COMPUTER NETWORKS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
             ['code' => 'CMPE432', 'title' => 'WIRELESS COMMUNICATION NETWORKS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
             ['code' => 'CMPE433', 'title' => 'WIRELESS SENSOR NETWORKS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
@@ -87,7 +97,21 @@ class CoursesSeeder extends Seeder
             ['code' => 'CMPE475', 'title' => 'ARTIFICIAL INTELLIGENCE TOOLS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
             ['code' => 'CMPE476', 'title' => 'DIGITAL FORENSICS AND INVESTIGATIONS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
             ['code' => 'ELEE426', 'title' => 'EMBEDDED SYSTEMS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
-
+['code' => 'CMPE434', 'title' => 'INFORMATION AND NETWORK SECURITY', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+['code' => 'CMPE455', 'title' => 'MODERN PROGRAMMING PLATFORMS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+['code' => 'CMPE474', 'title' => 'INTRODUCTION TO PARALLEL COMPUTING', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+['code' => 'CMPE475', 'title' => 'ARTIFICIAL INTELLIGENCE TOOLS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+['code' => 'CMPE476', 'title' => 'DIGITAL FORENSICS AND INVESTIGATIONS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+['code' => 'ELEE426', 'title' => 'EMBEDDED SYSTEMS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+['code' => 'CMPE431', 'title' => 'ADVANCED COMPUTER NETWORKS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+['code' => 'CMPE432', 'title' => 'WIRELESS COMMUNICATION NETWORKS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+['code' => 'CMPE433', 'title' => 'WIRELESS SENSOR NETWORKS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+['code' => 'CMPE461', 'title' => 'COMPUTING SYSTEMS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+['code' => 'CMPE462', 'title' => 'SERVICE-ORIENTED COMPUTING', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+['code' => 'CMPE463', 'title' => 'CLOUD COMPUTING', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+['code' => 'CMPE464', 'title' => 'ARTIFICIAL INTELLIGENCE', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+['code' => 'CMPE465', 'title' => 'NEURAL NETWORKS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+['code' => 'CMPE466', 'title' => 'EXPERT SYSTEMS', 'credits' => 4, 'category' => 'AE', 'semester' => null, 'ects' => 6],
             // FACULTY ELECTIVE COURSES (FE)
             ['code' => 'CHEM121', 'title' => 'CHEMISTRY', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 5],
             ['code' => 'MATH228', 'title' => 'ENGINEERING MATHEMATICS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
@@ -95,9 +119,13 @@ class CoursesSeeder extends Seeder
             ['code' => 'ELEE362', 'title' => 'COMMUNICATION SYSTEMS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 5],
             ['code' => 'ELEE431', 'title' => 'DIGITAL SIGNAL PROCESSING', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
             ['code' => 'SFWE315', 'title' => 'VISUAL PROGRAMMING', 'credits' => 3, 'category' => 'AC', 'semester' => 5, 'ects' => 5],
-            ['code' => 'SFWE316', 'title' => 'CRYPTOGRAPHY', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
-            ['code' => 'SFWE434', 'title' => 'INTERNET AND WEB PROGRAMMING', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE315', 'title' => 'VISUAL PROGRAMMING', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE434', 'title' => 'CRYPTOGRAPHY', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE316', 'title' => 'INTERNET AND WEB PROGRAMMING', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE316', 'title' => 'INTERNET AND WEB PROGRAMMING', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
             ['code' => 'SFWE415', 'title' => 'SOFTWARE ARCHITECTURE', 'credits' => 3, 'category' => 'AC', 'semester' => 7, 'ects' => 6],
+            ['code' => 'SFWE415', 'title' => 'SOFTWARE ARCHITECTURE', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
+            ['code' => 'SFWE411', 'title' => 'SOFTWARE VALIDATION & TESTING', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 6],
             ['code' => 'SFWE411', 'title' => 'SOFTWARE VALIDATION & TESTING', 'credits' => 3, 'category' => 'AC', 'semester' => 8, 'ects' => 6],
             ['code' => 'SFWE403', 'title' => 'SUMMER TRAINING', 'credits' => 0, 'category' => 'AC', 'semester' => 7, 'ects' => 2],
             ['code' => 'AINE301', 'title' => 'BASIC SEARCH METHODS', 'credits' => 3, 'category' => 'FE', 'semester' => null, 'ects' => 5],
@@ -137,12 +165,20 @@ class CoursesSeeder extends Seeder
             ['code' => 'COMP225', 'title' => 'DIGITAL LOGIC DESIGN', 'credits' => 4, 'category' => 'AC', 'semester' => 3, 'ects' => 6],
             ['code' => 'ENGL201', 'title' => 'ENGLISH III', 'credits' => 2, 'category' => 'FC', 'semester' => 3, 'ects' => 4],
             ['code' => 'GEED-01', 'title' => 'GENERAL EDUCATION ELECTIVE I', 'credits' => 3, 'category' => 'UE', 'semester' => 3, 'ects' => 4],
+            ['code' => 'COMP100', 'title' => 'Fundamentals of Computer Eng', 'credits' => 3, 'category' => 'AC', 'semester' => 1, 'ects' => 3],
+            ['code' => 'COMP103', 'title' => 'Information Technology and Applications ', 'credits' => 2, 'category' => 'UC', 'semester' => 1, 'ects' => 3],
+            ['code' => 'COMP104', 'title' => 'Computer Programming', 'credits' => 4, 'category' => 'UC', 'semester' => 2, 'ects' => 6],
+            ['code' => 'COMP215', 'title' => 'Algorithms and Data Structures', 'credits' => 4, 'category' => 'AC', 'semester' => 3, 'ects' => 6],
+            ['code' => 'ELEC235', 'title' => 'Electrical Circuits', 'credits' => 4, 'category' => 'AC', 'semester' => 3, 'ects' => 6],
 
             // YEAR 2 - SPRING SEMESTER (Semester 4)
             ['code' => 'MATH206', 'title' => 'PROBABILITY AND STATISTICS', 'credits' => 3, 'category' => 'FC', 'semester' => 4, 'ects' => 5],
             ['code' => 'SOFT252', 'title' => 'ANALYSIS OF ALGORITHMS', 'credits' => 4, 'category' => 'AC', 'semester' => 4, 'ects' => 8],
             ['code' => 'SOFT254', 'title' => 'AUTOMATA THEORY', 'credits' => 3, 'category' => 'AC', 'semester' => 4, 'ects' => 7],
             ['code' => 'COMP216', 'title' => 'OBJECT ORIENTED PROGRAMMING', 'credits' => 4, 'category' => 'AC', 'semester' => 4, 'ects' => 6],
+            ['code' => 'COMP232', 'title' => 'Operating Systems', 'credits' => 3, 'category' => 'AC', 'semester' => 4, 'ects' => 6],
+            ['code' => 'ELEC240', 'title' => 'ELECTRONICS', 'credits' => 3, 'category' => 'AC', 'semester' => 4, 'ects' => 5],
+            ['code' => 'HIST100/TURK100', 'title' => 'History of Turkish Republic/Turkish as a Second Language', 'credits' => 2, 'category' => 'UC', 'semester' => 4, 'ects' => 2],
             ['code' => 'GEED-02', 'title' => 'GENERAL EDUCATION ELECTIVE II', 'credits' => 3, 'category' => 'UE', 'semester' => 4, 'ects' => 4],
 
             // YEAR 3 - FALL SEMESTER (Semester 5)
@@ -159,8 +195,32 @@ class CoursesSeeder extends Seeder
             ['code' => 'SOFT342', 'title' => 'SOFTWARE PROJECT MANAGEMENT', 'credits' => 3, 'category' => 'AC', 'semester' => 6, 'ects' => 5],
             ['code' => 'TE1', 'title' => 'TECHNICAL ELECTIVE I', 'credits' => 3, 'category' => 'AE', 'semester' => 6, 'ects' => 5],
             ['code' => 'COMP352', 'title' => 'PROGRAMMING LANGUAGES', 'credits' => 3, 'category' => 'AC', 'semester' => 6, 'ects' => 5],
-            ['code' => 'GEED-03', 'title' => 'GENERAL EDUCATION ELECTIVE III', 'credits' => 3, 'category' => 'UE', 'semester' => 6, 'ects' => 4],
+            ['code' => 'GEED-03', 'title' => 'GENERAL EDUCATION ELECTIVE III', 'credits' => 3, 'category' => 'UE', 'semester' => 7, 'ects' => 4],
+['code' => 'COMP321', 'title' => 'MICROPROCESSORS', 'credits' => 4, 'category' => 'AC', 'semester' => 5, 'ects' => 6],
+['code' => 'COMP333', 'title' => 'SYSTEMS PROGRAMMING', 'credits' => 3, 'category' => 'AC', 'semester' => 5, 'ects' => 6],
+['code' => 'COMP341', 'title' => 'DATABASE SYSTEMS', 'credits' => 4, 'category' => 'AC', 'semester' => 5, 'ects' => 6],
+['code' => 'COMP351', 'title' => 'ANALYSIS OF ALGORITHMS', 'credits' => 3, 'category' => 'AC', 'semester' => 5, 'ects' => 6],
 
+// YEAR 3 - SPRING
+['code' => 'COMP322', 'title' => 'SIGNALS AND SYSTEMS', 'credits' => 3, 'category' => 'AC', 'semester' => 6, 'ects' => 6],
+['code' => 'COMP324', 'title' => 'COMPUTER ARCHITECTURE', 'credits' => 3, 'category' => 'AC', 'semester' => 6, 'ects' => 5],
+['code' => 'COMP332', 'title' => 'DATA COMMUNICATION AND COMPUTER NETWORKS', 'credits' => 4, 'category' => 'AC', 'semester' => 6, 'ects' => 6],
+['code' => 'COMP342', 'title' => 'SOFTWARE ENGINEERING', 'credits' => 4, 'category' => 'AC', 'semester' => 6, 'ects' => 6],
+
+// YEAR 4 - FALL
+['code' => 'COMP401', 'title' => 'ENGINEERING DESIGN I', 'credits' => 3, 'category' => 'FC', 'semester' => 7, 'ects' => 6],
+['code' => 'COMP403', 'title' => 'SUMMER TRAINING', 'credits' => 0, 'category' => 'FC', 'semester' => 7, 'ects' => 1],
+['code' => 'COMP471', 'title' => 'COMPUTER SIMULATION', 'credits' => 3, 'category' => 'AC', 'semester' => 7, 'ects' => 6],
+['code' => 'TE-01', 'title' => 'TECHNICAL ELECTIVE', 'credits' => 3, 'category' => 'AE', 'semester' => 7, 'ects' => 7],
+['code' => 'TE-02', 'title' => 'TECHNICAL ELECTIVE', 'credits' => 3, 'category' => 'AE', 'semester' => 7, 'ects' => 7],
+['code' => 'GEED-03', 'title' => 'GENERAL EDUCATION ELECTIVE III', 'credits' => 3, 'category' => 'UE', 'semester' => 7, 'ects' => 4],
+
+// YEAR 4 - SPRING
+['code' => 'COMP402', 'title' => 'ENGINEERING DESIGN II', 'credits' => 4, 'category' => 'FC', 'semester' => 8, 'ects' => 8],
+['code' => 'COMP404', 'title' => 'ENGINEERING ATTRIBUTES & ETHICS', 'credits' => 2, 'category' => 'FC', 'semester' => 8, 'ects' => 3],
+['code' => 'COMP454', 'title' => 'AUTOMATA THEORY', 'credits' => 3, 'category' => 'AC', 'semester' => 8, 'ects' => 6],
+['code' => 'TE-03', 'title' => 'TECHNICAL ELECTIVE', 'credits' => 3, 'category' => 'AE', 'semester' => 8, 'ects' => 7],
+['code' => 'TE-04', 'title' => 'TECHNICAL ELECTIVE', 'credits' => 3, 'category' => 'AE', 'semester' => 8, 'ects' => 7],
             // YEAR 4 - FALL SEMESTER (Semester 7)
             ['code' => 'SOFT401', 'title' => 'CAPSTONE PROJECT I', 'credits' => 3, 'category' => 'FC', 'semester' => 7, 'ects' => 6],
             ['code' => 'SOFT411', 'title' => 'SOFTWARE VALIDATION & TESTING', 'credits' => 3, 'category' => 'AC', 'semester' => 7, 'ects' => 5],
@@ -278,7 +338,25 @@ class CoursesSeeder extends Seeder
             // STATISTICS COURSE (using different code from AI curriculum)
             ['code' => 'ISTA226', 'title' => 'PROBABILITY AND STATISTICS', 'credits' => 3, 'category' => 'FC', 'semester' => 4, 'ects' => 6],
             ['code' => 'ENGP070', 'title' => 'ENGLISH PROFICIENCY TEST', 'credits' => 0, 'category' => null, 'semester' => 0, 'ects' => 0],
-            
+            ['code' => 'COMP421', 'title' => 'EMBEDDED SYSTEMS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+['code' => 'COMP422', 'title' => 'REAL-TIME SYSTEMS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+['code' => 'COMP431', 'title' => 'ADVANCED COMPUTER NETWORKS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+['code' => 'COMP432', 'title' => 'WIRELESS COMMUNICATION NETWORKS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+['code' => 'COMP433', 'title' => 'WIRELESS SENSOR NETWORKS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+['code' => 'COMP434', 'title' => 'INFORMATION AND NETWORK SECURITY', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+['code' => 'COMP441', 'title' => 'DATABASE MANAGEMENT SYSTEMS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+['code' => 'COMP442', 'title' => 'OBJECT-ORIENTED PROGRAMMING LANGUAGES & SYSTEMS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+['code' => 'COMP443', 'title' => 'OBJECT-ORIENTED SYSTEMS ANALYSIS AND DESIGN', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+['code' => 'COMP444', 'title' => 'SOFTWARE CONSTRUCTION', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+['code' => 'COMP445', 'title' => 'RAPID APPLICATION DEVELOPMENT', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+['code' => 'COMP461', 'title' => 'COMPUTING SYSTEMS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+['code' => 'COMP462', 'title' => 'SERVICE-ORIENTED COMPUTING', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+['code' => 'COMP464', 'title' => 'ARTIFICIAL INTELLIGENCE', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+['code' => 'COMP466', 'title' => 'EXPERT SYSTEMS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+['code' => 'COMP467', 'title' => 'DATA MINING', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+['code' => 'COMP472', 'title' => 'COMPUTER GRAPHICS', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+['code' => 'COMP473', 'title' => 'DIGITAL IMAGE PROCESSING', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
+['code' => 'COMP474', 'title' => 'INTRODUCTION TO PARALLEL COMPUTING', 'credits' => 3, 'category' => 'AE', 'semester' => null, 'ects' => 7],
         ];
 
         // Insert data in batches of 20 records

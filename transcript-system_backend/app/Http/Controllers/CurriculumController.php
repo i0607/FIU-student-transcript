@@ -48,14 +48,26 @@ class CurriculumController extends Controller
                     'curriculums.*',
                     'courses.code as course_code',
                     'courses.title as course_title',
+                    'courses.semester as course_semester',
+                    
+                    // Use curriculum table values (these override course defaults)
+                    'curriculums.total_credits as curriculum_credits',
+                    'curriculums.ects as curriculum_ects', 
+                    'curriculums.course_category as curriculum_category',
+                    'curriculums.pre_requisite as curriculum_pre_requisite',
+                    'curriculums.lecture_hours as curriculum_lecture_hours',
+                    'curriculums.lab_hours as curriculum_lab_hours',
+                    'curriculums.tutorial as curriculum_tutorial',
+                    
+                    // Keep course defaults for reference/fallback
                     'courses.credits as course_credits',
                     'courses.category as course_category',
-                    'courses.semester as course_semester',
                     'courses.ects as course_ects',
+                    
                     'faculties.title as faculty_title'
                 ])
                 ->orderByRaw($this->getCategoryOrderSql())
-                ->orderByRaw($this->getSemesterOrderSql()) // Fixed semester ordering
+                ->orderByRaw($this->getSemesterOrderSql())
                 ->orderBy('courses.code')
                 ->get();
 
@@ -82,7 +94,6 @@ class CurriculumController extends Controller
                     ],
                     'version' => $version,
                     'faculty_title' => $curriculumData->first()->faculty_title,
-                    'department_title' => $curriculumData->first()->department_title,
                     'statistics' => $statistics,
                     'courses_by_semester' => $groupedCourses['by_semester'],
                     'courses_by_category' => $groupedCourses['by_category'],
@@ -144,14 +155,26 @@ class CurriculumController extends Controller
                         'curriculums.*',
                         'courses.code as course_code',
                         'courses.title as course_title',
+                        'courses.semester as course_semester',
+                        
+                        // Use curriculum table values (these override course defaults)
+                        'curriculums.total_credits as curriculum_credits',
+                        'curriculums.ects as curriculum_ects', 
+                        'curriculums.course_category as curriculum_category',
+                        'curriculums.pre_requisite as curriculum_pre_requisite',
+                        'curriculums.lecture_hours as curriculum_lecture_hours',
+                        'curriculums.lab_hours as curriculum_lab_hours',
+                        'curriculums.tutorial as curriculum_tutorial',
+                        
+                        // Keep course defaults for reference/fallback
                         'courses.credits as course_credits',
                         'courses.category as course_category',
-                        'courses.semester as course_semester',
                         'courses.ects as course_ects',
+                        
                         'faculties.title as faculty_title'
                     ])
                     ->orderByRaw($this->getCategoryOrderSql())
-                    ->orderByRaw($this->getSemesterOrderSql()) // Fixed semester ordering
+                    ->orderByRaw($this->getSemesterOrderSql())
                     ->orderBy('courses.code')
                     ->get();
 
@@ -236,12 +259,13 @@ class CurriculumController extends Controller
 
     /**
      * Get SQL for category ordering: AC, FC, UC, AE, FE, UE
+     * Uses curriculum category with fallback to course category
      * 
      * @return string
      */
     private function getCategoryOrderSql()
     {
-        return "CASE courses.category 
+        return "CASE COALESCE(curriculums.course_category, courses.category)
                     WHEN 'AC' THEN 1 
                     WHEN 'FC' THEN 2 
                     WHEN 'UC' THEN 3 
@@ -253,15 +277,19 @@ class CurriculumController extends Controller
     }
 
     /**
-     * Get SQL for proper semester ordering - Fixed to handle numeric sorting properly
+     * Get SQL for proper semester ordering
+     * Uses only course semester since curriculums table doesn't have semester column
      * 
      * @return string
      */
     private function getSemesterOrderSql()
     {
         return "CASE 
-                    WHEN courses.semester IS NULL OR courses.semester = '' OR courses.semester = 'Elective' THEN 999
-                    WHEN courses.semester REGEXP '^[0-9]+$' THEN CAST(courses.semester AS UNSIGNED)
+                    WHEN courses.semester IS NULL 
+                      OR courses.semester = '' 
+                      OR courses.semester = 'Elective' THEN 999
+                    WHEN courses.semester REGEXP '^[0-9]+\$' 
+                      THEN CAST(courses.semester AS UNSIGNED)
                     ELSE 999
                 END";
     }
@@ -275,10 +303,12 @@ class CurriculumController extends Controller
     private function groupCoursesBySemesterAndCategory($curriculumData)
     {
         // Group by semester with proper ordering
-        $bySemester = $curriculumData->groupBy('course_semester')->map(function ($courses, $semester) {
+        $bySemester = $curriculumData->groupBy(function($course) {
+            return $course->course_semester;
+        })->map(function ($courses, $semester) {
             // Sort courses within each semester by category priority
             $sortedCourses = $courses->sortBy(function ($course) {
-                return $this->getCategoryPriority($course->course_category);
+                return $this->getCategoryPriority($course->curriculum_category ?? $course->course_category);
             })->values();
 
             return [
@@ -286,8 +316,12 @@ class CurriculumController extends Controller
                 'courses' => $sortedCourses->map(function ($course) {
                     return $this->formatSingleCourse($course);
                 })->values(),
-                'total_credits' => $courses->sum('course_credits'),
-                'total_ects' => $courses->sum('course_ects'),
+                'total_credits' => $courses->sum(function($course) {
+                    return $course->curriculum_credits ?? $course->course_credits;
+                }),
+                'total_ects' => $courses->sum(function($course) {
+                    return $course->curriculum_ects ?? $course->course_ects;
+                }),
                 'course_count' => $courses->count()
             ];
         });
@@ -298,7 +332,9 @@ class CurriculumController extends Controller
         })->values();
 
         // Group by category and sort categories by priority
-        $byCategory = $curriculumData->groupBy('course_category')->map(function ($courses, $category) {
+        $byCategory = $curriculumData->groupBy(function($course) {
+            return $course->curriculum_category ?? $course->course_category;
+        })->map(function ($courses, $category) {
             return [
                 'category' => $category ?: 'Others',
                 'category_name' => $this->getCategoryName($category),
@@ -306,8 +342,12 @@ class CurriculumController extends Controller
                 'courses' => $courses->map(function ($course) {
                     return $this->formatSingleCourse($course);
                 })->values(),
-                'total_credits' => $courses->sum('course_credits'),
-                'total_ects' => $courses->sum('course_ects'),
+                'total_credits' => $courses->sum(function($course) {
+                    return $course->curriculum_credits ?? $course->course_credits;
+                }),
+                'total_ects' => $courses->sum(function($course) {
+                    return $course->curriculum_ects ?? $course->course_ects;
+                }),
                 'course_count' => $courses->count()
             ];
         })->sortBy('category_priority')->values();
@@ -375,29 +415,49 @@ class CurriculumController extends Controller
      */
     private function calculateCurriculumStatistics($curriculumData)
     {
-        $totalCredits = $curriculumData->sum('course_credits');
-        $totalEcts = $curriculumData->sum('course_ects');
+        // Use curriculum-specific values with fallback to course defaults
+        $totalCredits = $curriculumData->sum(function($course) {
+            return $course->curriculum_credits ?? $course->course_credits;
+        });
+        $totalEcts = $curriculumData->sum(function($course) {
+            return $course->curriculum_ects ?? $course->course_ects;
+        });
         $totalCourses = $curriculumData->count();
         
-        $categoryCounts = $curriculumData->groupBy('course_category')->map(function ($courses, $category) {
+        $categoryCounts = $curriculumData->groupBy(function($course) {
+            return $course->curriculum_category ?? $course->course_category;
+        })->map(function ($courses, $category) {
             return [
                 'category' => $category ?: 'Others',
                 'category_name' => $this->getCategoryName($category),
                 'category_priority' => $this->getCategoryPriority($category),
                 'count' => $courses->count(),
-                'credits' => $courses->sum('course_credits'),
-                'ects' => $courses->sum('course_ects')
+                'credits' => $courses->sum(function($course) {
+                    return $course->curriculum_credits ?? $course->course_credits;
+                }),
+                'ects' => $courses->sum(function($course) {
+                    return $course->curriculum_ects ?? $course->course_ects;
+                })
             ];
         })->sortBy('category_priority')->values();
 
-        $semesterCounts = $curriculumData->groupBy('course_semester')->map(function ($courses, $semester) {
+        $semesterCounts = $curriculumData->groupBy(function($course) {
+            return $course->course_semester;
+        })->map(function ($courses, $semester) {
             return [
                 'semester' => $semester ?: 'Elective',
                 'count' => $courses->count(),
-                'credits' => $courses->sum('course_credits'),
-                'ects' => $courses->sum('course_ects')
+                'credits' => $courses->sum(function($course) {
+                    return $course->curriculum_credits ?? $course->course_credits;
+                }),
+                'ects' => $courses->sum(function($course) {
+                    return $course->curriculum_ects ?? $course->course_ects;
+                })
             ];
-        })->sort(function ($a, $b) {
+        });
+
+        // Sort the semester counts using a custom comparator
+        $sortedSemesterCounts = $semesterCounts->sort(function ($a, $b) {
             return $this->compareSemesters($a['semester'], $b['semester']);
         })->values();
 
@@ -407,7 +467,7 @@ class CurriculumController extends Controller
             'total_ects' => $totalEcts,
             'average_credits_per_course' => $totalCourses > 0 ? round($totalCredits / $totalCourses, 2) : 0,
             'category_breakdown' => $categoryCounts,
-            'semester_breakdown' => $semesterCounts
+            'semester_breakdown' => $sortedSemesterCounts
         ];
     }
 
@@ -425,7 +485,7 @@ class CurriculumController extends Controller
     }
 
     /**
-     * Format single course data
+     * Format single course data - prioritizes curriculum values over course defaults
      * 
      * @param object $course
      * @return array
@@ -436,16 +496,23 @@ class CurriculumController extends Controller
             'course_id' => $course->course_id,
             'code' => $course->course_code,
             'title' => $course->course_title,
-            'credits' => (int) $course->course_credits,
-            'ects' => (int) $course->course_ects,
-            'category' => $course->course_category,
-            'category_name' => $this->getCategoryName($course->course_category),
+            
+            // Use curriculum-specific values with fallback to course defaults
+            'credits' => (int) ($course->curriculum_credits ?? $course->course_credits),
+            'ects' => (int) ($course->curriculum_ects ?? $course->course_ects),
+            'category' => $course->curriculum_category ?? $course->course_category,
             'semester' => $course->course_semester ?: 'Elective',
-            'lecture_hours' => (int) $course->lecture_hours,
-            'lab_hours' => (int) $course->lab_hours,
-            'total_credits' => (int) $course->total_credits,
-            'pre_requisite' => $course->pre_requisite,
-            'curriculum_id' => $course->id
+            'pre_requisite' => $course->curriculum_pre_requisite ?? 'None',
+            
+            'category_name' => $this->getCategoryName($course->curriculum_category ?? $course->course_category),
+            'lecture_hours' => (int) ($course->curriculum_lecture_hours ?? 0),
+            'lab_hours' => (int) ($course->curriculum_lab_hours ?? 0),
+            'tutorial' => (int) ($course->curriculum_tutorial ?? 0),
+            'total_credits' => (int) ($course->curriculum_credits ?? $course->course_credits),
+            'curriculum_id' => $course->id,
+            
+            // Include equivalent courses if they exist (empty array for now)
+            'equivalent_courses' => []
         ];
     }
 
